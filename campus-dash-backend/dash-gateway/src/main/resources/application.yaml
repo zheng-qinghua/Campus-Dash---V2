@@ -1,0 +1,28 @@
+server:
+  port: 8090
+  forward-headers-strategy: none
+spring:
+  application:
+    name: campus-dash-gateway
+  main:
+    web-application-type: reactive
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6380}
+      password: ${SPRING_DATA_REDIS_PASSWORD:}
+      timeout: 300ms
+dash:
+  gateway:
+    backend-uri: ${DASH_BACKEND_URI:http://127.0.0.1:8080}
+    backend-ws-uri: ${DASH_BACKEND_WS_URI:ws://127.0.0.1:8080}
+    # 精确 IP 白名单，空值只相信直接连接的 socket；不信任客户端转发头。
+    trusted-proxies: ${DASH_TRUSTED_PROXIES:}
+    max-concurrent: 1000
+    route-rate: 1000
+    route-burst: 2000
+    ip-rate: 100
+    ip-burst: 200
+    auth-ip-rate: 2
+    auth-ip-burst: 10
+    redis-timeout-ms: 300

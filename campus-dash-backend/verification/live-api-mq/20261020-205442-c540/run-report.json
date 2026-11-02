@@ -1,0 +1,194 @@
+{
+  "runId": "20261020-205442-c540",
+  "database": "campus_dash_verify_live_20261020_205442_c540",
+  "startedAt": "2026-10-20T20:54:42.748957",
+  "passed": true,
+  "checks": [
+    {
+      "name": "真实API/MQ脚本完整通过",
+      "passed": true,
+      "evidence": 31
+    },
+    {
+      "name": "三个自动流程都有MQ消费者证据",
+      "passed": true,
+      "evidence": [
+        {
+          "name": "确认超时转候选",
+          "id": "238284150061305856",
+          "source": "worker MQ 消费者日志",
+          "lines": [
+            "2026-10-20T20:56:39.119+08:00 DEBUG 75260 --- [campus-dash-worker] [onsumption-5-67] c.c.worker.TimeoutTransferConsumer       : 超时消息处理完成 errandId=238284150061305856 round=0 outcome=TRANSFERRED"
+          ]
+        },
+        {
+          "name": "空候选回退",
+          "id": "238284150476541952",
+          "source": "worker MQ 消费者日志",
+          "lines": [
+            "2026-10-20T20:56:39.102+08:00 DEBUG 75260 --- [campus-dash-worker] [onsumption-5-69] c.c.worker.TimeoutTransferConsumer       : 超时消息处理完成 errandId=238284150476541952 round=0 outcome=REVERTED"
+          ]
+        },
+        {
+          "name": "送达超时自动结算",
+          "id": "238284150786920448",
+          "source": "worker MQ 消费者日志",
+          "lines": [
+            "2026-10-20T20:56:54.150+08:00  INFO 75260 --- [campus-dash-worker] [onsumption-2-80] c.campusdash.worker.AutoSettleConsumer   : 自动结算消息处理 errandId=238284150786920448 result=SETTLED"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "本轮没有兜底扫描代替MQ",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "MQ超时转候选未提前执行",
+      "passed": true,
+      "evidence": [
+        "2026-10-20 20:56:38.524",
+        "2026-10-20 20:56:39.073",
+        "549000"
+      ]
+    },
+    {
+      "name": "MQ候选空回退未提前执行",
+      "passed": true,
+      "evidence": [
+        "2026-10-20 20:56:38.623",
+        "2026-10-20 20:56:39.073",
+        "450000"
+      ]
+    },
+    {
+      "name": "MQ送达自动结算未提前执行",
+      "passed": true,
+      "evidence": [
+        "2026-10-20 20:56:53.762",
+        "2026-10-20 20:56:54.106",
+        "344000"
+      ]
+    },
+    {
+      "name": "账户总额守恒",
+      "passed": true,
+      "evidence": {
+        "before": 200000,
+        "after": 200000
+      }
+    },
+    {
+      "name": "所有业务借贷平衡",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "托管余额与HELD一致",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "订单终态与托管终态一致",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "逐账户快照与流水净额一致",
+      "passed": true,
+      "evidence": {
+        "1": 0,
+        "2": 0,
+        "1001": 100000,
+        "2001": 0,
+        "2002": 0,
+        "9001": 0,
+        "11001": 100000,
+        "12001": 0,
+        "12002": 0
+      }
+    },
+    {
+      "name": "每订单每轮最多一个占用事实",
+      "passed": true,
+      "evidence": 0
+    }
+  ],
+  "environment": {
+    "mysql": "8.0.40",
+    "redis": "7.4",
+    "rocketmq": "5.3.1",
+    "confirmSeconds": 30,
+    "autoSettleSeconds": 45,
+    "scanIntervalMillis": 600000,
+    "defaultRunnerRateLimits": true
+  },
+  "logs": {
+    "api": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-205442-c540/api.log",
+    "worker": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-205442-c540/worker.log"
+  },
+  "ports": {
+    "redis": 52048,
+    "mq": 52049,
+    "api": 52050
+  },
+  "network": "dash-live-20261020-205442-c540",
+  "baselineTotalCents": 200000,
+  "jarSha256": {
+    "api": "f612600638c44c984134c0741a6753be0d260e823a441d17bb6d1b5f71ecd8fc",
+    "worker": "733342a680cfeded1cc5776ff1b08b874e00ba4d7325e9a138a262d69a0f9386"
+  },
+  "javaPids": [
+    75259,
+    75260
+  ],
+  "readyAt": "2026-10-20T20:56:04.886395",
+  "scriptCommand": [
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-frontend/tests/live_api_smoke.py",
+    "--isolated-backend-ready",
+    "--base",
+    "http://127.0.0.1:52050",
+    "--worker-log",
+    "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-205442-c540/worker.log",
+    "--output",
+    "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-205442-c540/api-results"
+  ],
+  "scriptExitCode": 0,
+  "apiChecks": 31,
+  "apiPassed": true,
+  "taskIds": [
+    "238284137432256512",
+    "238284148253560832",
+    "238284149113393152",
+    "238284150061305856",
+    "238284150476541952",
+    "238284150786920448"
+  ],
+  "mqTiming": [
+    {
+      "name": "MQ超时转候选",
+      "errandId": "238284150061305856",
+      "scheduledAt": "2026-10-20 20:56:38.524",
+      "appliedAt": "2026-10-20 20:56:39.073",
+      "latenessMicros": 549000
+    },
+    {
+      "name": "MQ候选空回退",
+      "errandId": "238284150476541952",
+      "scheduledAt": "2026-10-20 20:56:38.623",
+      "appliedAt": "2026-10-20 20:56:39.073",
+      "latenessMicros": 450000
+    },
+    {
+      "name": "MQ送达自动结算",
+      "errandId": "238284150786920448",
+      "scheduledAt": "2026-10-20 20:56:53.762",
+      "appliedAt": "2026-10-20 20:56:54.106",
+      "latenessMicros": 344000
+    }
+  ],
+  "processesStopped": true,
+  "finishedAt": "2026-10-20T20:57:12.570542"
+}

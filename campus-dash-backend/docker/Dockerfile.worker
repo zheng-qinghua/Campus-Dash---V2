@@ -1,0 +1,5 @@
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY dash-worker/target/dash-worker-1.0.0-SNAPSHOT.jar /app/worker.jar
+USER 10001
+ENTRYPOINT ["java", "-jar", "/app/worker.jar"]

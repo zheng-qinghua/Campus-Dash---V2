@@ -1,0 +1,383 @@
+{
+  "runId": "20261020-210214-5f5b",
+  "database": "campus_dash_verify_live_20261020_210214_5f5b",
+  "startedAt": "2026-10-20T21:02:14.356005",
+  "passed": true,
+  "checks": [
+    {
+      "name": "真实API/MQ脚本完整通过",
+      "passed": true,
+      "evidence": 31
+    },
+    {
+      "name": "三个自动流程都有MQ消费者证据",
+      "passed": true,
+      "evidence": [
+        {
+          "name": "确认超时转候选",
+          "id": "238286002416947200",
+          "source": "worker MQ 消费者日志",
+          "lines": [
+            "2026-10-20T21:04:01.137+08:00 DEBUG 80299 --- [campus-dash-worker] [onsumption-5-68] c.c.worker.TimeoutTransferConsumer       : 超时消息处理完成 errandId=238286002416947200 round=0 outcome=TRANSFERRED"
+          ]
+        },
+        {
+          "name": "空候选回退",
+          "id": "238286002765074432",
+          "source": "worker MQ 消费者日志",
+          "lines": [
+            "2026-10-20T21:04:01.126+08:00 DEBUG 80299 --- [campus-dash-worker] [onsumption-5-70] c.c.worker.TimeoutTransferConsumer       : 超时消息处理完成 errandId=238286002765074432 round=0 outcome=REVERTED"
+          ]
+        },
+        {
+          "name": "送达超时自动结算",
+          "id": "238286002995761152",
+          "source": "worker MQ 消费者日志",
+          "lines": [
+            "2026-10-20T21:04:16.428+08:00  INFO 80299 --- [campus-dash-worker] [onsumption-2-80] c.campusdash.worker.AutoSettleConsumer   : 自动结算消息处理 errandId=238286002995761152 result=SETTLED"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "本轮没有兜底扫描代替MQ",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "本轮六个订单及托管均达到预期终态",
+      "passed": true,
+      "evidence": [
+        {
+          "name": "20请求竞争单名额",
+          "errandId": "238285985664897024",
+          "expected": [
+            "SETTLED",
+            "RELEASED"
+          ],
+          "actual": [
+            "SETTLED",
+            "RELEASED"
+          ]
+        },
+        {
+          "name": "20请求重复退款",
+          "errandId": "238286001024438272",
+          "expected": [
+            "CANCELLED",
+            "REFUNDED"
+          ],
+          "actual": [
+            "CANCELLED",
+            "REFUNDED"
+          ]
+        },
+        {
+          "name": "仲裁支持跑腿",
+          "errandId": "238286001464840192",
+          "expected": [
+            "SETTLED",
+            "RELEASED"
+          ],
+          "actual": [
+            "SETTLED",
+            "RELEASED"
+          ]
+        },
+        {
+          "name": "MQ超时转候选",
+          "errandId": "238286002416947200",
+          "expected": [
+            "SETTLED",
+            "RELEASED"
+          ],
+          "actual": [
+            "SETTLED",
+            "RELEASED"
+          ]
+        },
+        {
+          "name": "MQ候选空回退",
+          "errandId": "238286002765074432",
+          "expected": [
+            "CANCELLED",
+            "REFUNDED"
+          ],
+          "actual": [
+            "CANCELLED",
+            "REFUNDED"
+          ]
+        },
+        {
+          "name": "MQ送达自动结算",
+          "errandId": "238286002995761152",
+          "expected": [
+            "SETTLED",
+            "RELEASED"
+          ],
+          "actual": [
+            "SETTLED",
+            "RELEASED"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "本轮无未决抢单请求",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "MQ超时转候选未提前执行",
+      "passed": true,
+      "evidence": [
+        "2026-10-20 21:04:00.151",
+        "2026-10-20 21:04:01.097",
+        "946000"
+      ]
+    },
+    {
+      "name": "MQ候选空回退未提前执行",
+      "passed": true,
+      "evidence": [
+        "2026-10-20 21:04:00.231",
+        "2026-10-20 21:04:01.096",
+        "865000"
+      ]
+    },
+    {
+      "name": "MQ送达自动结算未提前执行",
+      "passed": true,
+      "evidence": [
+        "2026-10-20 21:04:15.340",
+        "2026-10-20 21:04:16.352",
+        "1012000"
+      ]
+    },
+    {
+      "name": "账户总额守恒",
+      "passed": true,
+      "evidence": {
+        "before": 200000,
+        "after": 200000
+      }
+    },
+    {
+      "name": "所有业务借贷平衡",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "托管余额与HELD一致",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "订单终态与托管终态一致",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "逐账户快照与流水净额一致",
+      "passed": true,
+      "evidence": {
+        "1": 0,
+        "2": 0,
+        "1001": 100000,
+        "2001": 0,
+        "2002": 0,
+        "9001": 0,
+        "11001": 100000,
+        "12001": 0,
+        "12002": 0
+      }
+    },
+    {
+      "name": "每订单每轮最多一个占用事实",
+      "passed": true,
+      "evidence": 0
+    }
+  ],
+  "environment": {
+    "mysql": "8.0.40",
+    "redis": "7.4",
+    "rocketmq": "5.3.1",
+    "confirmSeconds": 30,
+    "autoSettleSeconds": 45,
+    "scanIntervalMillis": 600000,
+    "defaultRunnerRateLimits": true
+  },
+  "logs": {
+    "api": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-210214-5f5b/api.log",
+    "worker": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-210214-5f5b/worker.log"
+  },
+  "ports": {
+    "redis": 55564,
+    "mq": 55565,
+    "api": 55566
+  },
+  "network": "dash-live-20261020-210214-5f5b",
+  "baselineTotalCents": 200000,
+  "jarSha256": {
+    "api": "f612600638c44c984134c0741a6753be0d260e823a441d17bb6d1b5f71ecd8fc",
+    "worker": "733342a680cfeded1cc5776ff1b08b874e00ba4d7325e9a138a262d69a0f9386"
+  },
+  "javaPids": [
+    80298,
+    80299
+  ],
+  "readyAt": "2026-10-20T21:03:25.500906",
+  "scriptCommand": [
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-frontend/tests/live_api_smoke.py",
+    "--isolated-backend-ready",
+    "--base",
+    "http://127.0.0.1:55566",
+    "--worker-log",
+    "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-210214-5f5b/worker.log",
+    "--output",
+    "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-210214-5f5b/api-results"
+  ],
+  "scriptExitCode": 0,
+  "apiChecks": 31,
+  "apiPassed": true,
+  "taskIds": [
+    "238285985664897024",
+    "238286001024438272",
+    "238286001464840192",
+    "238286002416947200",
+    "238286002765074432",
+    "238286002995761152"
+  ],
+  "mqTiming": [
+    {
+      "name": "MQ超时转候选",
+      "errandId": "238286002416947200",
+      "scheduledAt": "2026-10-20 21:04:00.151",
+      "appliedAt": "2026-10-20 21:04:01.097",
+      "latenessMicros": 946000
+    },
+    {
+      "name": "MQ候选空回退",
+      "errandId": "238286002765074432",
+      "scheduledAt": "2026-10-20 21:04:00.231",
+      "appliedAt": "2026-10-20 21:04:01.096",
+      "latenessMicros": 865000
+    },
+    {
+      "name": "MQ送达自动结算",
+      "errandId": "238286002995761152",
+      "scheduledAt": "2026-10-20 21:04:15.340",
+      "appliedAt": "2026-10-20 21:04:16.352",
+      "latenessMicros": 1012000
+    }
+  ],
+  "businessPassed": true,
+  "cleanup": {
+    "java": [
+      {
+        "pid": 80298,
+        "stopped": true,
+        "exitCode": 143
+      },
+      {
+        "pid": 80299,
+        "stopped": true,
+        "exitCode": -9
+      }
+    ],
+    "containers": [
+      {
+        "name": "dash-live-20261020-210214-5f5b-broker",
+        "kind": "container",
+        "before": {
+          "exists": true,
+          "ownerRunId": "20261020-210214-5f5b",
+          "error": null
+        },
+        "removed": true,
+        "logsExitCode": 0,
+        "brokerLogsExitCode": 0,
+        "removal": {
+          "exitCode": 0,
+          "stdout": "dash-live-20261020-210214-5f5b-broker\n",
+          "stderr": ""
+        },
+        "after": {
+          "exists": false,
+          "ownerRunId": null,
+          "error": null
+        }
+      },
+      {
+        "name": "dash-live-20261020-210214-5f5b-namesrv",
+        "kind": "container",
+        "before": {
+          "exists": true,
+          "ownerRunId": "20261020-210214-5f5b",
+          "error": null
+        },
+        "removed": true,
+        "logsExitCode": 0,
+        "brokerLogsExitCode": 0,
+        "removal": {
+          "exitCode": 0,
+          "stdout": "dash-live-20261020-210214-5f5b-namesrv\n",
+          "stderr": ""
+        },
+        "after": {
+          "exists": false,
+          "ownerRunId": null,
+          "error": null
+        }
+      },
+      {
+        "name": "dash-live-20261020-210214-5f5b-redis",
+        "kind": "container",
+        "before": {
+          "exists": true,
+          "ownerRunId": "20261020-210214-5f5b",
+          "error": null
+        },
+        "removed": true,
+        "logsExitCode": 0,
+        "removal": {
+          "exitCode": 0,
+          "stdout": "dash-live-20261020-210214-5f5b-redis\n",
+          "stderr": ""
+        },
+        "after": {
+          "exists": false,
+          "ownerRunId": null,
+          "error": null
+        }
+      }
+    ],
+    "network": {
+      "name": "dash-live-20261020-210214-5f5b",
+      "kind": "network",
+      "before": {
+        "exists": true,
+        "ownerRunId": "20261020-210214-5f5b",
+        "error": null
+      },
+      "removed": true,
+      "removal": {
+        "exitCode": 0,
+        "stdout": "dash-live-20261020-210214-5f5b\n",
+        "stderr": ""
+      },
+      "after": {
+        "exists": false,
+        "ownerRunId": null,
+        "error": null
+      }
+    },
+    "errors": [],
+    "passed": true
+  },
+  "processesStopped": true,
+  "containersStopped": true,
+  "networkRemoved": true,
+  "finishedAt": "2026-10-20T21:04:35.206924"
+}

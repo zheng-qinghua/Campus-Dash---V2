@@ -1,0 +1,5 @@
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY dash-bootstrap/target/dash-bootstrap-1.0.0-SNAPSHOT.jar /app/app.jar
+USER 10001
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]

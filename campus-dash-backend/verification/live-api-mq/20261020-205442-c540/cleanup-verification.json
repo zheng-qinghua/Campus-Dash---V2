@@ -1,0 +1,15 @@
+{
+  "runId": "20261020-205442-c540",
+  "javaPidsStopped": {
+    "75259": true,
+    "75260": true
+  },
+  "remainingContainers": [],
+  "networkRemoved": true,
+  "sharedServices": {
+    "dash-mysql": "healthy",
+    "dash-redis": "healthy",
+    "dash-rmqnamesrv": "healthy",
+    "dash-rmqbroker": "healthy"
+  }
+}

@@ -1,0 +1,6088 @@
+{
+  "mode": "真实 HTTP + 轮询 + worker 日志；不改库、不 mock；仅专用测试账户",
+  "startedAt": "2026-10-20T22:02:57.095198",
+  "checks": [
+    {
+      "name": "系统账户-1不能通过演示登录",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "系统账户-2不能通过演示登录",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "20个真实并发抢单请求恰好1个成功，其余为业务结果或明确退避",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "赢家原UUID重放返回相同成功结果",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "原UUID结果查询与首次成功及重放一致",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "并发抢单后名额与实际接单人一致",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "非发单人12001结算被拒绝",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "非发单人12002结算被拒绝",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "同单20并发结算恰好1次SETTLED",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "并发结算只到账950分",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "并发结算只有1条真实入账流水",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "并发结算信用只增加一次",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "20并发取消只有1次实际退款",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "重复取消不会增加钱包余额",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "重复取消只有1条777分退款入账流水",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "非仲裁员11001裁决被拒绝",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "非仲裁员12001裁决被拒绝",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "非仲裁员12002裁决被拒绝",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "真实仲裁可将争议悬赏结算给跑腿",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "已裁决争议重复提交不再次入账",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "仲裁支持跑腿只有1条475分入账流水",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "名额冲突返回明确拒绝终态",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "确认超时自动转给12002且轮次增加",
+      "scope": "MQ状态",
+      "passed": true
+    },
+    {
+      "name": "候选接单人可真实确认",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "超时转候选由MQ消费者触发",
+      "scope": "MQ日志",
+      "passed": true
+    },
+    {
+      "name": "候选为空自动回退并归还名额",
+      "scope": "MQ状态",
+      "passed": true
+    },
+    {
+      "name": "空候选回退由MQ消费者触发",
+      "scope": "MQ日志",
+      "passed": true
+    },
+    {
+      "name": "送达超时自动结算到账528分",
+      "scope": "MQ状态",
+      "passed": true
+    },
+    {
+      "name": "自动结算只有1条528分入账流水",
+      "scope": "API",
+      "passed": true
+    },
+    {
+      "name": "自动结算由MQ消费者触发",
+      "scope": "MQ日志",
+      "passed": true
+    },
+    {
+      "name": "自动结算后手动重复结算保持幂等",
+      "scope": "API",
+      "passed": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 453
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 4
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 287,
+      "data": {
+        "availableCents": "100000",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "availableCents": "0",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12002,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "availableCents": "0",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "http": 200,
+      "requestId": null,
+      "code": "UNAUTHORIZED",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "http": 200,
+      "requestId": null,
+      "code": "UNAUTHORIZED",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 226,
+      "data": {
+        "errandId": "238300966733123584",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300966733123584",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 36,
+      "data": {
+        "id": "238300966733123584",
+        "title": "真实API验收 1020-220257 · 20请求竞争单名额",
+        "status": "PUBLISHED",
+        "type": "DELIVERY",
+        "rewardCents": "1000",
+        "slotTotal": 1,
+        "slotTaken": 0,
+        "publisherId": "11001",
+        "grabberId": "-1",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "CANCEL"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 429,
+      "requestId": "ebd85eff-9919-48f7-a1bd-8710172fbac5",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 40,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "ebd85eff-9919-48f7-a1bd-8710172fbac5",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1999",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 429,
+      "requestId": "3f9bf317-345b-4fe0-8b29-48fbfb8b6419",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 41,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "3f9bf317-345b-4fe0-8b29-48fbfb8b6419",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1995",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 429,
+      "requestId": "0c959aef-f463-4eff-a0b6-6a0bc5a4f97a",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 39,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "0c959aef-f463-4eff-a0b6-6a0bc5a4f97a",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1993",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 429,
+      "requestId": "3c302cb2-748b-4e58-add9-0cbf2010d359",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 52,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "3c302cb2-748b-4e58-add9-0cbf2010d359",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1995",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 429,
+      "requestId": "a70365da-b3a1-491b-9f3e-7ffe4800564f",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 47,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "a70365da-b3a1-491b-9f3e-7ffe4800564f",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1989",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 429,
+      "requestId": "3662d2d5-0e48-4ff6-b903-dc7c0a7713f2",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 52,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "3662d2d5-0e48-4ff6-b903-dc7c0a7713f2",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1999",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 429,
+      "requestId": "87ebf51a-ecfc-446f-83ff-6016398b65e3",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 55,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "87ebf51a-ecfc-446f-83ff-6016398b65e3",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1999",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 429,
+      "requestId": "caab4960-416a-4c5a-918d-ba2985309372",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 58,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "caab4960-416a-4c5a-918d-ba2985309372",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1974",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 429,
+      "requestId": "bde499ae-8650-4017-8b9c-8ae403cb6f39",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 58,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "bde499ae-8650-4017-8b9c-8ae403cb6f39",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1974",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 429,
+      "requestId": "8a883627-067a-4c00-94fc-b6fb727545ce",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 55,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "8a883627-067a-4c00-94fc-b6fb727545ce",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1972",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 429,
+      "requestId": "6b502d9b-2641-4307-8875-baebb8fc7b01",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 62,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "6b502d9b-2641-4307-8875-baebb8fc7b01",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1969",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 429,
+      "requestId": "dfa58576-185a-4a87-b7a1-14343dcb14d7",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 60,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "dfa58576-185a-4a87-b7a1-14343dcb14d7",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1968",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 429,
+      "requestId": "ff1647ab-299d-4aa2-b6e0-9cd00c938aa5",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 63,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "ff1647ab-299d-4aa2-b6e0-9cd00c938aa5",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1968",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 429,
+      "requestId": "9073fa3f-c73c-4f6b-b2b6-a8eb38cbc192",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 61,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "9073fa3f-c73c-4f6b-b2b6-a8eb38cbc192",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1970",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 429,
+      "requestId": "44b27e36-9831-4df1-91a7-e6349e3747d2",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 63,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "44b27e36-9831-4df1-91a7-e6349e3747d2",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1969",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 429,
+      "requestId": "5840b5d2-522e-43ae-8891-525a0850bee8",
+      "code": "GRAB_RATE_LIMITED",
+      "retryAfter": "2",
+      "elapsedMs": 66,
+      "data": {
+        "code": "GRAB_RATE_LIMITED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "5840b5d2-522e-43ae-8891-525a0850bee8",
+        "status": null,
+        "appliedRound": null,
+        "replayed": false,
+        "retryAfterMillis": "1966",
+        "httpStatus": 429
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 409,
+      "requestId": "bf155fc5-402c-4b00-bb37-d5095cb97775",
+      "code": "SLOT_FULL",
+      "retryAfter": null,
+      "elapsedMs": 294,
+      "data": {
+        "code": "SLOT_FULL",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "bf155fc5-402c-4b00-bb37-d5095cb97775",
+        "status": "REJECTED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 409
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 409,
+      "requestId": "8ba7e929-606b-4741-9085-31d7b234a09c",
+      "code": "SLOT_FULL",
+      "retryAfter": null,
+      "elapsedMs": 298,
+      "data": {
+        "code": "SLOT_FULL",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "8ba7e929-606b-4741-9085-31d7b234a09c",
+        "status": "REJECTED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 409
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12002,
+      "http": 409,
+      "requestId": "dacfa258-9a7a-45ba-a614-1b0d5a7089f1",
+      "code": "SLOT_FULL",
+      "retryAfter": null,
+      "elapsedMs": 293,
+      "data": {
+        "code": "SLOT_FULL",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "dacfa258-9a7a-45ba-a614-1b0d5a7089f1",
+        "status": "REJECTED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 409
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 200,
+      "requestId": "ee6c4e10-031a-4c03-af59-5d70a68d8a1f",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 2199,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "ee6c4e10-031a-4c03-af59-5d70a68d8a1f",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/grab",
+      "actor": 12001,
+      "http": 200,
+      "requestId": "ee6c4e10-031a-4c03-af59-5d70a68d8a1f",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 23,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "ee6c4e10-031a-4c03-af59-5d70a68d8a1f",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": true,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300966733123584/grab-requests/ee6c4e10-031a-4c03-af59-5d70a68d8a1f",
+      "actor": 12001,
+      "http": 200,
+      "requestId": "ee6c4e10-031a-4c03-af59-5d70a68d8a1f",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 12,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "ee6c4e10-031a-4c03-af59-5d70a68d8a1f",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": true,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300966733123584",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 25,
+      "data": {
+        "id": "238300966733123584",
+        "title": "真实API验收 1020-220257 · 20请求竞争单名额",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "1000",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300966733123584",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300966733123584",
+        "title": "真实API验收 1020-220257 · 20请求竞争单名额",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "1000",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "CURRENT_RUNNER",
+        "availableActions": [
+          "CONFIRM"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/confirm",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 43,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/pickup",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 78,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/deliver",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 35,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "NOT_PUBLISHER",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300966733123584",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 16,
+      "data": {
+        "id": "238300966733123584",
+        "title": "真实API验收 1020-220257 · 20请求竞争单名额",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "1000",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 12002,
+      "http": 200,
+      "requestId": null,
+      "code": "NOT_PUBLISHER",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300966733123584",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300966733123584",
+        "title": "真实API验收 1020-220257 · 20请求竞争单名额",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "1000",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 4,
+      "data": {
+        "availableCents": "0",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "4e963798-b25b-41e0-a219-de4e83a01beb",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 160,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "b2f43542-835a-41c1-836c-c9fcf0c982c1",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 160,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "f3b92b7d-5410-4d56-aed6-01b9d1bd4b83",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 162,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "b3aebf2f-c50c-4daf-a68f-eee56d2552eb",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 161,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "d98db40f-6ef1-4ff0-92e7-99d4d844d417",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 162,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "90abd7d2-638f-42a7-a380-c3952dab439f",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 161,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "c397d0d2-38be-4413-beeb-e11285d5acf2",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 161,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "9550b58b-d509-4d34-ae66-7746fbb7d3e8",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 163,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "ab0ed5b1-3568-46d8-8494-c5436ddc470c",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 163,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "ee57822c-c67b-49e0-ac98-2dd8fe6345bd",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 165,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "4f89e36f-e5b4-49d1-9fce-7dea8a2a2d93",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 164,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "8974e576-4e82-49c8-a751-00ca461abf2b",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 166,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "9cdbe6c4-b96e-45dd-b6b8-b1f96d40bf76",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 165,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "055211a1-a07a-4012-a606-b5adbdba029e",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 167,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "573dca90-5a6a-44f9-98d7-c9c26b806e55",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 165,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "70f13890-b079-4dcc-97be-fab24d575145",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 166,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "6c79a171-769b-4ea3-83fc-aee947efa2c1",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 166,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "8c2bbaef-b24e-440f-89c3-c0a4b5194610",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 166,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "b6611591-fa17-4101-849f-16ae793966ca",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 169,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300966733123584/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "55dde216-9c85-4c03-87e7-f95edee7dccd",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 191,
+      "data": {
+        "result": "SETTLED"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5,
+      "data": {
+        "availableCents": "950",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet/ledger?size=100",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 18,
+      "data": [
+        {
+          "amountCents": "950",
+          "bizNo": "settle:238300966733123584",
+          "time": "2026-10-20T14:03:00.729Z",
+          "refType": "SETTLE",
+          "refId": "238300966733123584",
+          "direction": "CREDIT"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/credit/self",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "events": [
+          {
+            "refId": "238300966733123584",
+            "delta": 2,
+            "time": "2026-10-20T14:03:00.733Z",
+            "description": "完成结算",
+            "type": "SETTLE"
+          }
+        ],
+        "windowDays": 30,
+        "score": 62
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5,
+      "data": {
+        "availableCents": "99000",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 47,
+      "data": {
+        "errandId": "238300979215372288",
+        "status": "PUBLISHED",
+        "frozenCents": "777"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "8edc11af-168a-492c-8d3d-7c3661a20d01",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 67,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "a35eaa7b-097a-4c45-9a4a-49c946a37df7",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 66,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "69922094-300e-46a0-b3dc-e9a5d77d0e97",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 77,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "b3ee0295-dcfb-4c67-9305-61892daf1336",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 77,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "2ac92502-1439-429e-8ad8-8bd313d72672",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 84,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "2cd345b1-17c0-4310-8b07-73d031c5776e",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 84,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "6b3ae02b-545c-4a41-8ba6-b5dc565507fa",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 86,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "e480a281-5e3e-45d1-9fb7-39dffdea45ee",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 85,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "7d881513-85c2-412e-9561-824a97fc8eb1",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 88,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "9ca9657f-7132-4124-ba42-9231edffd7f6",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 87,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "b2fa47ca-6e5e-4839-a5ea-626dcfc62fc6",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 89,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "258cacda-6d10-41bf-b271-659fa8b0835a",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 90,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "2ead8575-e305-4892-99e9-a6c489754d09",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 88,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "2b21f804-229c-4d9f-af0e-710b69373483",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 90,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "d63a0337-c2d2-4437-b1ec-fe35b2ef3dd3",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 87,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "f4fe7a26-900e-4f6d-8a6d-ca84dfc6af50",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 87,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "64b23b83-5f6a-4aa6-8157-daf10051ecb6",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 89,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "f72e8e4d-aaf6-4e5b-aef6-f0f23c8b44ea",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 91,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "a1ba8a67-4ac7-4191-bc6e-ec8644c412fd",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 90,
+      "data": {
+        "result": "CONFLICT"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979215372288/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": "5a8650e0-4f5d-46da-ab69-5337be4e5457",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 94,
+      "data": {
+        "result": "REFUNDED"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "availableCents": "99000",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300979215372288",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 15,
+      "data": {
+        "id": "238300979215372288",
+        "title": "真实API验收 1020-220257 · 20请求重复退款",
+        "status": "CANCELLED",
+        "type": "DELIVERY",
+        "rewardCents": "777",
+        "slotTotal": 1,
+        "slotTaken": 0,
+        "publisherId": "11001",
+        "grabberId": "-1",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet/ledger?size=100",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": [
+        {
+          "amountCents": "777",
+          "bizNo": "refund:238300979215372288",
+          "time": "2026-10-20T14:03:00.952Z",
+          "refType": "REFUND",
+          "refId": "238300979215372288",
+          "direction": "CREDIT"
+        },
+        {
+          "amountCents": "777",
+          "bizNo": "refund:238300979215372288",
+          "time": "2026-10-20T14:03:00.951Z",
+          "refType": "REFUND",
+          "refId": "238300979215372288",
+          "direction": "DEBIT"
+        },
+        {
+          "amountCents": "777",
+          "bizNo": "escrow:238300979215372288",
+          "time": "2026-10-20T14:03:00.867Z",
+          "refType": "ESCROW",
+          "refId": "238300979215372288",
+          "direction": "CREDIT"
+        },
+        {
+          "amountCents": "777",
+          "bizNo": "escrow:238300979215372288",
+          "time": "2026-10-20T14:03:00.866Z",
+          "refType": "ESCROW",
+          "refId": "238300979215372288",
+          "direction": "DEBIT"
+        },
+        {
+          "amountCents": "1000",
+          "bizNo": "settle:238300966733123584",
+          "time": "2026-10-20T14:03:00.728Z",
+          "refType": "SETTLE",
+          "refId": "238300966733123584",
+          "direction": "DEBIT"
+        },
+        {
+          "amountCents": "1000",
+          "bizNo": "escrow:238300966733123584",
+          "time": "2026-10-20T14:02:57.901Z",
+          "refType": "ESCROW",
+          "refId": "238300966733123584",
+          "direction": "CREDIT"
+        },
+        {
+          "amountCents": "1000",
+          "bizNo": "escrow:238300966733123584",
+          "time": "2026-10-20T14:02:57.897Z",
+          "refType": "ESCROW",
+          "refId": "238300966733123584",
+          "direction": "DEBIT"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 66,
+      "data": {
+        "errandId": "238300979940986880",
+        "status": "PUBLISHED",
+        "frozenCents": "500"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300979940986880",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 15,
+      "data": {
+        "id": "238300979940986880",
+        "title": "真实API验收 1020-220257 · 仲裁支持跑腿",
+        "status": "PUBLISHED",
+        "type": "DELIVERY",
+        "rewardCents": "500",
+        "slotTotal": 1,
+        "slotTaken": 0,
+        "publisherId": "11001",
+        "grabberId": "-1",
+        "round": 0,
+        "role": "VIEWER",
+        "availableActions": [
+          "GRAB"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979940986880/grab",
+      "actor": 12001,
+      "http": 200,
+      "requestId": "ff893bf8-bae3-4f06-a974-fefe18273e2f",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 87,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "ff893bf8-bae3-4f06-a974-fefe18273e2f",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300979940986880",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 18,
+      "data": {
+        "id": "238300979940986880",
+        "title": "真实API验收 1020-220257 · 仲裁支持跑腿",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "500",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "CURRENT_RUNNER",
+        "availableActions": [
+          "CONFIRM"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979940986880/confirm",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 26,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979940986880/dispute",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 31,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979940986880/arbitrate",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "UNAUTHORIZED",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300979940986880",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 12,
+      "data": {
+        "id": "238300979940986880",
+        "title": "真实API验收 1020-220257 · 仲裁支持跑腿",
+        "status": "DISPUTED",
+        "type": "DELIVERY",
+        "rewardCents": "500",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979940986880/arbitrate",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "UNAUTHORIZED",
+      "retryAfter": null,
+      "elapsedMs": 5,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300979940986880",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300979940986880",
+        "title": "真实API验收 1020-220257 · 仲裁支持跑腿",
+        "status": "DISPUTED",
+        "type": "DELIVERY",
+        "rewardCents": "500",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979940986880/arbitrate",
+      "actor": 12002,
+      "http": 200,
+      "requestId": null,
+      "code": "UNAUTHORIZED",
+      "retryAfter": null,
+      "elapsedMs": 4,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300979940986880",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300979940986880",
+        "title": "真实API验收 1020-220257 · 仲裁支持跑腿",
+        "status": "DISPUTED",
+        "type": "DELIVERY",
+        "rewardCents": "500",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "availableCents": "950",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979940986880/arbitrate",
+      "actor": 9001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 67,
+      "data": {
+        "result": "SETTLED_TO_RUNNER"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300979940986880",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 15,
+      "data": {
+        "id": "238300979940986880",
+        "title": "真实API验收 1020-220257 · 仲裁支持跑腿",
+        "status": "SETTLED",
+        "type": "DELIVERY",
+        "rewardCents": "500",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5,
+      "data": {
+        "availableCents": "1425",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300979940986880/arbitrate",
+      "actor": 9001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5,
+      "data": {
+        "result": "ALREADY_DONE"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 4,
+      "data": {
+        "availableCents": "1425",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet/ledger?size=100",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": [
+        {
+          "amountCents": "475",
+          "bizNo": "settle:238300979940986880",
+          "time": "2026-10-20T14:03:01.351Z",
+          "refType": "SETTLE",
+          "refId": "238300979940986880",
+          "direction": "CREDIT"
+        },
+        {
+          "amountCents": "950",
+          "bizNo": "settle:238300966733123584",
+          "time": "2026-10-20T14:03:00.729Z",
+          "refType": "SETTLE",
+          "refId": "238300966733123584",
+          "direction": "CREDIT"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 34,
+      "data": {
+        "errandId": "238300981589348352",
+        "status": "PUBLISHED",
+        "frozenCents": "333"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 16,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "PUBLISHED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 0,
+        "publisherId": "11001",
+        "grabberId": "-1",
+        "round": 0,
+        "role": "VIEWER",
+        "availableActions": [
+          "GRAB"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300981589348352/grab",
+      "actor": 12001,
+      "http": 200,
+      "requestId": "b5155599-8eb2-48e8-8ae1-4df83ab5103d",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 89,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "b5155599-8eb2-48e8-8ae1-4df83ab5103d",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 12002,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 15,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "VIEWER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300981589348352/grab",
+      "actor": 12002,
+      "http": 409,
+      "requestId": "4f4d3b5c-debe-4482-a415-98b9273f00ac",
+      "code": "SLOT_FULL",
+      "retryAfter": null,
+      "elapsedMs": 30,
+      "data": {
+        "code": "SLOT_FULL",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "4f4d3b5c-debe-4482-a415-98b9273f00ac",
+        "status": "REJECTED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 409
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 36,
+      "data": {
+        "errandId": "238300982365294592",
+        "status": "PUBLISHED",
+        "frozenCents": "444"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982365294592",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 14,
+      "data": {
+        "id": "238300982365294592",
+        "title": "真实API验收 1020-220257 · MQ候选空回退",
+        "status": "PUBLISHED",
+        "type": "DELIVERY",
+        "rewardCents": "444",
+        "slotTotal": 1,
+        "slotTaken": 0,
+        "publisherId": "11001",
+        "grabberId": "-1",
+        "round": 0,
+        "role": "VIEWER",
+        "availableActions": [
+          "GRAB"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300982365294592/grab",
+      "actor": 12001,
+      "http": 200,
+      "requestId": "eaad8106-5da7-47f3-bfe3-fee4a0b97a25",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 66,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "eaad8106-5da7-47f3-bfe3-fee4a0b97a25",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 29,
+      "data": {
+        "errandId": "238300982847639552",
+        "status": "PUBLISHED",
+        "frozenCents": "555"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "availableCents": "1425",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 11,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "PUBLISHED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 0,
+        "publisherId": "11001",
+        "grabberId": "-1",
+        "round": 0,
+        "role": "VIEWER",
+        "availableActions": [
+          "GRAB"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300982847639552/grab",
+      "actor": 12001,
+      "http": 200,
+      "requestId": "58529a6f-b7b5-4394-84d2-c3fa785959b2",
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 76,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "58529a6f-b7b5-4394-84d2-c3fa785959b2",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 17,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "CURRENT_RUNNER",
+        "availableActions": [
+          "CONFIRM"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300982847639552/confirm",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 32,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300982847639552/pickup",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 31,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300982847639552/deliver",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 31,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 14,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 23,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 15,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 13,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 13,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 12,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 11,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 23,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 11,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 11,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 12,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 22,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 11,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 69,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 12,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 12,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 21,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12002",
+        "round": 1,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12002",
+        "round": 1,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 14,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12002",
+        "round": 1,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 12002,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "LOCKED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12002",
+        "round": 1,
+        "role": "CURRENT_RUNNER",
+        "availableActions": [
+          "CONFIRM"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300981589348352/confirm",
+      "actor": 12002,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 42,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 21,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "ACCEPTED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12002",
+        "round": 1,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300981589348352",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300981589348352",
+        "title": "真实API验收 1020-220257 · MQ超时转候选",
+        "status": "ACCEPTED",
+        "type": "DELIVERY",
+        "rewardCents": "333",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12002",
+        "round": 1,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300981589348352/pickup",
+      "actor": 12002,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 36,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300981589348352/deliver",
+      "actor": 12002,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 32,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300981589348352/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 67,
+      "data": {
+        "result": "SETTLED"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982365294592",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 13,
+      "data": {
+        "id": "238300982365294592",
+        "title": "真实API验收 1020-220257 · MQ候选空回退",
+        "status": "PUBLISHED",
+        "type": "DELIVERY",
+        "rewardCents": "444",
+        "slotTotal": 1,
+        "slotTaken": 0,
+        "publisherId": "11001",
+        "grabberId": "-1",
+        "round": 1,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "CANCEL"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982365294592",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300982365294592",
+        "title": "真实API验收 1020-220257 · MQ候选空回退",
+        "status": "PUBLISHED",
+        "type": "DELIVERY",
+        "rewardCents": "444",
+        "slotTotal": 1,
+        "slotTaken": 0,
+        "publisherId": "11001",
+        "grabberId": "-1",
+        "round": 1,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "CANCEL"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982365294592",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5,
+      "data": {
+        "id": "238300982365294592",
+        "title": "真实API验收 1020-220257 · MQ候选空回退",
+        "status": "PUBLISHED",
+        "type": "DELIVERY",
+        "rewardCents": "444",
+        "slotTotal": 1,
+        "slotTaken": 0,
+        "publisherId": "11001",
+        "grabberId": "-1",
+        "round": 1,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "CANCEL"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300982365294592/cancel",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 74,
+      "data": {
+        "result": "REFUNDED"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 15,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 13,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 12,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 20,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 12,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 22,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 65,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 9,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 12,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "DELIVERED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": [
+          "SETTLE",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238300982847639552",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 18,
+      "data": {
+        "id": "238300982847639552",
+        "title": "真实API验收 1020-220257 · MQ送达自动结算",
+        "status": "SETTLED",
+        "type": "DELIVERY",
+        "rewardCents": "555",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "PUBLISHER",
+        "availableActions": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 4,
+      "data": {
+        "availableCents": "1953",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3,
+      "data": {
+        "availableCents": "1953",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet/ledger?size=100",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": [
+        {
+          "amountCents": "528",
+          "bizNo": "settle:238300982847639552",
+          "time": "2026-10-20T14:03:48.524Z",
+          "refType": "SETTLE",
+          "refId": "238300982847639552",
+          "direction": "CREDIT"
+        },
+        {
+          "amountCents": "475",
+          "bizNo": "settle:238300979940986880",
+          "time": "2026-10-20T14:03:01.351Z",
+          "refType": "SETTLE",
+          "refId": "238300979940986880",
+          "direction": "CREDIT"
+        },
+        {
+          "amountCents": "950",
+          "bizNo": "settle:238300966733123584",
+          "time": "2026-10-20T14:03:00.729Z",
+          "refType": "SETTLE",
+          "refId": "238300966733123584",
+          "direction": "CREDIT"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238300982847639552/settle",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 4,
+      "data": {
+        "availableCents": "1953",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 11001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6,
+      "data": {
+        "availableCents": "97612",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "availableCents": "1953",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12002,
+      "http": 200,
+      "requestId": null,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5,
+      "data": {
+        "availableCents": "317",
+        "frozenCents": "0"
+      }
+    }
+  ],
+  "tasks": {
+    "20请求竞争单名额": {
+      "id": "238300966733123584",
+      "rewardCents": 1000
+    },
+    "20请求重复退款": {
+      "id": "238300979215372288",
+      "rewardCents": 777
+    },
+    "仲裁支持跑腿": {
+      "id": "238300979940986880",
+      "rewardCents": 500
+    },
+    "MQ超时转候选": {
+      "id": "238300981589348352",
+      "rewardCents": 333
+    },
+    "MQ候选空回退": {
+      "id": "238300982365294592",
+      "rewardCents": 444
+    },
+    "MQ送达自动结算": {
+      "id": "238300982847639552",
+      "rewardCents": 555
+    }
+  },
+  "concurrency": {
+    "grab20": [
+      {
+        "actor": 12001,
+        "requestId": "8ba7e929-606b-4741-9085-31d7b234a09c",
+        "http": 409,
+        "body": {
+          "code": "SLOT_FULL",
+          "message": "名额已满",
+          "data": {
+            "code": "SLOT_FULL",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "8ba7e929-606b-4741-9085-31d7b234a09c",
+            "status": "REJECTED",
+            "appliedRound": 0,
+            "replayed": false,
+            "retryAfterMillis": "0",
+            "httpStatus": 409
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 12002,
+        "requestId": "bf155fc5-402c-4b00-bb37-d5095cb97775",
+        "http": 409,
+        "body": {
+          "code": "SLOT_FULL",
+          "message": "名额已满",
+          "data": {
+            "code": "SLOT_FULL",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "bf155fc5-402c-4b00-bb37-d5095cb97775",
+            "status": "REJECTED",
+            "appliedRound": 0,
+            "replayed": false,
+            "retryAfterMillis": "0",
+            "httpStatus": 409
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 12001,
+        "requestId": "6b502d9b-2641-4307-8875-baebb8fc7b01",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "6b502d9b-2641-4307-8875-baebb8fc7b01",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1969",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12002,
+        "requestId": "44b27e36-9831-4df1-91a7-e6349e3747d2",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "44b27e36-9831-4df1-91a7-e6349e3747d2",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1969",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12001,
+        "requestId": "ff1647ab-299d-4aa2-b6e0-9cd00c938aa5",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "ff1647ab-299d-4aa2-b6e0-9cd00c938aa5",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1968",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12002,
+        "requestId": "8a883627-067a-4c00-94fc-b6fb727545ce",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "8a883627-067a-4c00-94fc-b6fb727545ce",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1972",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12001,
+        "requestId": "3c302cb2-748b-4e58-add9-0cbf2010d359",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "3c302cb2-748b-4e58-add9-0cbf2010d359",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1995",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12002,
+        "requestId": "3662d2d5-0e48-4ff6-b903-dc7c0a7713f2",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "3662d2d5-0e48-4ff6-b903-dc7c0a7713f2",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1999",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12001,
+        "requestId": "5840b5d2-522e-43ae-8891-525a0850bee8",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "5840b5d2-522e-43ae-8891-525a0850bee8",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1966",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12002,
+        "requestId": "9073fa3f-c73c-4f6b-b2b6-a8eb38cbc192",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "9073fa3f-c73c-4f6b-b2b6-a8eb38cbc192",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1970",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12001,
+        "requestId": "ee6c4e10-031a-4c03-af59-5d70a68d8a1f",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "code": "OK",
+            "grabbed": true,
+            "candidateRank": null,
+            "requestId": "ee6c4e10-031a-4c03-af59-5d70a68d8a1f",
+            "status": "SUCCEEDED",
+            "appliedRound": 0,
+            "replayed": false,
+            "retryAfterMillis": "0",
+            "httpStatus": 200
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 12002,
+        "requestId": "bde499ae-8650-4017-8b9c-8ae403cb6f39",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "bde499ae-8650-4017-8b9c-8ae403cb6f39",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1974",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12001,
+        "requestId": "a70365da-b3a1-491b-9f3e-7ffe4800564f",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "a70365da-b3a1-491b-9f3e-7ffe4800564f",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1989",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12002,
+        "requestId": "ebd85eff-9919-48f7-a1bd-8710172fbac5",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "ebd85eff-9919-48f7-a1bd-8710172fbac5",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1999",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12001,
+        "requestId": "0c959aef-f463-4eff-a0b6-6a0bc5a4f97a",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "0c959aef-f463-4eff-a0b6-6a0bc5a4f97a",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1993",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12002,
+        "requestId": "dacfa258-9a7a-45ba-a614-1b0d5a7089f1",
+        "http": 409,
+        "body": {
+          "code": "SLOT_FULL",
+          "message": "名额已满",
+          "data": {
+            "code": "SLOT_FULL",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "dacfa258-9a7a-45ba-a614-1b0d5a7089f1",
+            "status": "REJECTED",
+            "appliedRound": 0,
+            "replayed": false,
+            "retryAfterMillis": "0",
+            "httpStatus": 409
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 12001,
+        "requestId": "dfa58576-185a-4a87-b7a1-14343dcb14d7",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "dfa58576-185a-4a87-b7a1-14343dcb14d7",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1968",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12002,
+        "requestId": "87ebf51a-ecfc-446f-83ff-6016398b65e3",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "87ebf51a-ecfc-446f-83ff-6016398b65e3",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1999",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12001,
+        "requestId": "caab4960-416a-4c5a-918d-ba2985309372",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "caab4960-416a-4c5a-918d-ba2985309372",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1974",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      },
+      {
+        "actor": 12002,
+        "requestId": "3f9bf317-345b-4fe0-8b29-48fbfb8b6419",
+        "http": 429,
+        "body": {
+          "code": "GRAB_RATE_LIMITED",
+          "message": "当前任务过热，请稍后再试",
+          "data": {
+            "code": "GRAB_RATE_LIMITED",
+            "grabbed": false,
+            "candidateRank": null,
+            "requestId": "3f9bf317-345b-4fe0-8b29-48fbfb8b6419",
+            "status": null,
+            "appliedRound": null,
+            "replayed": false,
+            "retryAfterMillis": "1995",
+            "httpStatus": 429
+          }
+        },
+        "retryAfter": "2"
+      }
+    ],
+    "settle20": [
+      {
+        "actor": 11001,
+        "requestId": "9cdbe6c4-b96e-45dd-b6b8-b1f96d40bf76",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "055211a1-a07a-4012-a606-b5adbdba029e",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "c397d0d2-38be-4413-beeb-e11285d5acf2",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "55dde216-9c85-4c03-87e7-f95edee7dccd",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "SETTLED"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "d98db40f-6ef1-4ff0-92e7-99d4d844d417",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "8974e576-4e82-49c8-a751-00ca461abf2b",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "573dca90-5a6a-44f9-98d7-c9c26b806e55",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "70f13890-b079-4dcc-97be-fab24d575145",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "ee57822c-c67b-49e0-ac98-2dd8fe6345bd",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "6c79a171-769b-4ea3-83fc-aee947efa2c1",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "f3b92b7d-5410-4d56-aed6-01b9d1bd4b83",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "b6611591-fa17-4101-849f-16ae793966ca",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "8c2bbaef-b24e-440f-89c3-c0a4b5194610",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "b2f43542-835a-41c1-836c-c9fcf0c982c1",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "4e963798-b25b-41e0-a219-de4e83a01beb",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "ab0ed5b1-3568-46d8-8494-c5436ddc470c",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "90abd7d2-638f-42a7-a380-c3952dab439f",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "b3aebf2f-c50c-4daf-a68f-eee56d2552eb",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "4f89e36f-e5b4-49d1-9fce-7dea8a2a2d93",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "9550b58b-d509-4d34-ae66-7746fbb7d3e8",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      }
+    ],
+    "cancel20": [
+      {
+        "actor": 11001,
+        "requestId": "5a8650e0-4f5d-46da-ab69-5337be4e5457",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "REFUNDED"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "2ac92502-1439-429e-8ad8-8bd313d72672",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "64b23b83-5f6a-4aa6-8157-daf10051ecb6",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "258cacda-6d10-41bf-b271-659fa8b0835a",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "d63a0337-c2d2-4437-b1ec-fe35b2ef3dd3",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "a35eaa7b-097a-4c45-9a4a-49c946a37df7",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "9ca9657f-7132-4124-ba42-9231edffd7f6",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "f4fe7a26-900e-4f6d-8a6d-ca84dfc6af50",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "8edc11af-168a-492c-8d3d-7c3661a20d01",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "7d881513-85c2-412e-9561-824a97fc8eb1",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "b2fa47ca-6e5e-4839-a5ea-626dcfc62fc6",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "69922094-300e-46a0-b3dc-e9a5d77d0e97",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "2cd345b1-17c0-4310-8b07-73d031c5776e",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "f72e8e4d-aaf6-4e5b-aef6-f0f23c8b44ea",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "2b21f804-229c-4d9f-af0e-710b69373483",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "a1ba8a67-4ac7-4191-bc6e-ec8644c412fd",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "6b3ae02b-545c-4a41-8ba6-b5dc565507fa",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "e480a281-5e3e-45d1-9fb7-39dffdea45ee",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "b3ee0295-dcfb-4c67-9305-61892daf1336",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      },
+      {
+        "actor": 11001,
+        "requestId": "2ead8575-e305-4892-99e9-a6c489754d09",
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "result": "CONFLICT"
+          }
+        },
+        "retryAfter": null
+      }
+    ]
+  },
+  "polls": [
+    {
+      "name": "确认超时转给候选",
+      "id": "238300981589348352",
+      "elapsedSeconds": 30.33,
+      "states": [
+        {
+          "elapsedSeconds": 0.01,
+          "state": {
+            "status": "LOCKED",
+            "round": 0,
+            "grabberId": "12001",
+            "slotTaken": 1
+          }
+        },
+        {
+          "elapsedSeconds": 30.33,
+          "state": {
+            "status": "LOCKED",
+            "round": 1,
+            "grabberId": "12002",
+            "slotTaken": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "空候选队列回退",
+      "id": "238300982365294592",
+      "elapsedSeconds": 0.01,
+      "states": [
+        {
+          "elapsedSeconds": 0.01,
+          "state": {
+            "status": "PUBLISHED",
+            "round": 1,
+            "grabberId": "-1",
+            "slotTaken": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "送达超时自动结算",
+      "id": "238300982847639552",
+      "elapsedSeconds": 15.98,
+      "states": [
+        {
+          "elapsedSeconds": 0.02,
+          "state": {
+            "status": "DELIVERED",
+            "round": 0,
+            "grabberId": "12001",
+            "slotTaken": 1
+          }
+        },
+        {
+          "elapsedSeconds": 15.98,
+          "state": {
+            "status": "SETTLED",
+            "round": 0,
+            "grabberId": "12001",
+            "slotTaken": 1
+          }
+        }
+      ]
+    }
+  ],
+  "mqEvidence": [
+    {
+      "name": "确认超时转候选",
+      "id": "238300981589348352",
+      "source": "worker MQ 消费者日志",
+      "lines": [
+        "2026-10-20T22:03:32.211+08:00 DEBUG 2077 --- [campus-dash-worker] [onsumption-5-70] c.c.worker.TimeoutTransferConsumer       : 超时消息处理完成 errandId=238300981589348352 round=0 outcome=TRANSFERRED"
+      ]
+    },
+    {
+      "name": "空候选回退",
+      "id": "238300982365294592",
+      "source": "worker MQ 消费者日志",
+      "lines": [
+        "2026-10-20T22:03:32.190+08:00 DEBUG 2077 --- [campus-dash-worker] [onsumption-5-69] c.c.worker.TimeoutTransferConsumer       : 超时消息处理完成 errandId=238300982365294592 round=0 outcome=REVERTED"
+      ]
+    },
+    {
+      "name": "送达超时自动结算",
+      "id": "238300982847639552",
+      "source": "worker MQ 消费者日志",
+      "lines": [
+        "2026-10-20T22:03:48.584+08:00  INFO 2077 --- [campus-dash-worker] [onsumption-2-80] c.campusdash.worker.AutoSettleConsumer   : 自动结算消息处理 errandId=238300982847639552 result=SETTLED"
+      ]
+    }
+  ],
+  "balances": {
+    "before": {
+      "11001": 100000,
+      "12001": 0,
+      "12002": 0
+    },
+    "after": {
+      "11001": 97612,
+      "12001": 1953,
+      "12002": 317
+    }
+  },
+  "passed": true,
+  "mqWaitingStartedAt": "2026-10-20T22:03:01.959929",
+  "finishedAt": "2026-10-20T22:03:48.645977",
+  "outcomeCounts": {
+    "grab20": {
+      "SLOT_FULL": 3,
+      "GRAB_RATE_LIMITED": 16,
+      "OK": 1
+    },
+    "settle20": {
+      "CONFLICT": 19,
+      "SETTLED": 1
+    },
+    "cancel20": {
+      "REFUNDED": 1,
+      "CONFLICT": 19
+    }
+  },
+  "scannerLogLines": []
+}

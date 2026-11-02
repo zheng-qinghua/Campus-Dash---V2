@@ -1,0 +1,84 @@
+{
+  "command": "REQUIRE_MQ=true bash scripts/verify-grab-v2.sh -q",
+  "exitCode": 0,
+  "database": "campus_dash_verify_20261020_202336",
+  "requireMiddleware": true,
+  "requireMQ": true,
+  "javaRuntime": "23.0.2",
+  "compilerRelease": 21,
+  "maven": "3.9.6",
+  "log": "campus_dash_verify_20261020_202336.log",
+  "modules": [
+    {
+      "module": "dash-application",
+      "tests": 30,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "dash-bench",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "dash-bootstrap",
+      "tests": 90,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "dash-domain",
+      "tests": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "dash-gateway",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "dash-infrastructure",
+      "tests": 49,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "dash-presentation",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "dash-worker",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "total": {
+    "tests": 219,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reports": 59,
+  "earliestReport": "2026-10-20T20:23:42.236837",
+  "latestReport": "2026-10-20T20:25:41.283295",
+  "frontend": {
+    "tests": 17,
+    "failures": 0,
+    "buildPassed": true
+  },
+  "cleanupEvidence": "cleanup-review-20261020_202515.json"
+}

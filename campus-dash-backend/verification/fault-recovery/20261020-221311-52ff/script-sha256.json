@@ -1,0 +1,7 @@
+{
+  "scripts/verify-fault-recovery.py": "622309f374ae50a8d31ae0a28b38c5baa62de79bf888f631fd4d8367a74d466b",
+  "scripts/fault_injection.py": "26fbcd5788bdcd362032f4e19291aab3c89974ea2cb51a18f1d0063e5cd1f041",
+  "scripts/publish-fault-messages.py": "0ed50dcb5069f30270b6c635bee1e1d135a2941dfb40f8d837e24a279606b858",
+  "scripts/FaultMessagePublisher.java": "6de874ba3ae820bdde019b43e007e3fcfb381f6572cb8a3f8d95076be098f002",
+  "scripts/test_fault_injection.py": "2d5bb68289826928ef8f03ad4d57b0a585d58f893a7caa9bfe91bc62183b3d70"
+}

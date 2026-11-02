@@ -1,0 +1,440 @@
+{
+  "runId": "20261020-215443-d8ae",
+  "database": "campus_dash_verify_fault_20261020_215443_d8ae",
+  "startedAt": "2026-10-20T21:54:43.981159",
+  "passed": false,
+  "checks": [],
+  "environment": {
+    "mysql": "8.0.40",
+    "redis": "7.4",
+    "rocketmq": "5.3.1",
+    "confirmSeconds": 30,
+    "autoSettleSeconds": 45,
+    "scanIntervalMillis": 5000,
+    "redisTimeoutMillis": 1000,
+    "brokerTransactionCheckMillis": 5000,
+    "defaultRunnerRateLimits": true
+  },
+  "logs": {
+    "api-1": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-215443-d8ae/api-1.log",
+    "worker-1": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-215443-d8ae/worker-1.log"
+  },
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 512
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 8
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 5
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 543,
+      "data": {
+        "errandId": "238299305893597184",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238299305893597184/grab",
+      "actor": 12001,
+      "requestId": "c5a28db0-6962-4aa5-a865-457603387c24",
+      "http": 500,
+      "code": "INTERNAL_ERROR",
+      "retryAfter": null,
+      "elapsedMs": 1016,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 132
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 6
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 18
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238299305893597184/cancel",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3086,
+      "data": {
+        "result": "REFUNDED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 56,
+      "data": {
+        "errandId": "238299329461391360",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238299329461391360/grab",
+      "actor": 12001,
+      "requestId": "50927736-1eb9-4e3f-891a-bbfac98c6d20",
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 318,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "50927736-1eb9-4e3f-891a-bbfac98c6d20",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238299329461391360/confirm",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 196,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238299329461391360/pickup",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 35,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238299329461391360/deliver",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 38,
+      "data": null
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-10-20T21:56:12.298403",
+      "name": "服务启动",
+      "service": "api",
+      "pid": 61350,
+      "log": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-215443-d8ae/api-1.log",
+      "scanMillis": 5000
+    },
+    {
+      "at": "2026-10-20T21:56:21.119777",
+      "name": "服务启动",
+      "service": "worker",
+      "pid": 61942,
+      "log": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-215443-d8ae/worker-1.log",
+      "scanMillis": 5000
+    },
+    {
+      "at": "2026-10-20T21:56:22.766487",
+      "name": "容器故障操作",
+      "action": "kill",
+      "container": "dash-fault-20261020-215443-d8ae-redis"
+    },
+    {
+      "at": "2026-10-20T21:56:24.153249",
+      "name": "容器故障操作",
+      "action": "start",
+      "container": "dash-fault-20261020-215443-d8ae-redis"
+    },
+    {
+      "at": "2026-10-20T21:56:32.681563",
+      "name": "重复消息已实际投递",
+      "topic": "errand-auto-settle",
+      "key": "autosettle:238299329461391360",
+      "count": 3
+    }
+  ],
+  "tasks": {
+    "Redis鉴权故障基线": {
+      "id": "238299305893597184",
+      "reward": 1000,
+      "expected": "CANCELLED"
+    },
+    "提前自动结算消息基线": {
+      "id": "238299329461391360",
+      "reward": 1000,
+      "expected": "SETTLED"
+    }
+  },
+  "mqSends": [
+    {
+      "topic": "errand-auto-settle",
+      "key": "autosettle:238299329461391360",
+      "count": 3,
+      "evidence": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-215443-d8ae/mq-send-1.json",
+      "receipt": {
+        "ok": true,
+        "startedAt": "2026-10-20T13:56:30.051565Z",
+        "endpoints": "127.0.0.1:49488",
+        "topic": "errand-auto-settle",
+        "key": "autosettle:238299329461391360",
+        "tag": "",
+        "mode": "delay",
+        "countRequested": 3,
+        "countSent": 3,
+        "countPublished": 3,
+        "payloadSha256": "f746cde2e52fc524874007e6ff27e423c5216f1f50be4443c5742df856c4a452",
+        "receipts": [
+          {
+            "index": 0,
+            "messageId": "01AA5493C2DEF9F71E0AE90D1000000000",
+            "acknowledgedAt": "2026-10-20T13:56:32.241573Z"
+          },
+          {
+            "index": 1,
+            "messageId": "01AA5493C2DEF9F71E0AE90D1000000001",
+            "acknowledgedAt": "2026-10-20T13:56:32.255205Z"
+          },
+          {
+            "index": 2,
+            "messageId": "01AA5493C2DEF9F71E0AE90D1000000002",
+            "acknowledgedAt": "2026-10-20T13:56:32.267106Z"
+          }
+        ],
+        "outcomeUnknown": false,
+        "deliveryTimestamp": "1792504593088",
+        "finishedAt": "2026-10-20T13:56:32.296708Z",
+        "buildSha256": "7671f2dc26f1608a90551e395f4e149aa24cfc2d1923ef817d396d7d6d338b2b",
+        "javaExitCode": 0
+      }
+    }
+  ],
+  "baselineProbe": true,
+  "ports": {
+    "redis": 49487,
+    "mq": 49488,
+    "api": 49489
+  },
+  "mysqlProxyPort": 49490,
+  "network": "dash-fault-20261020-215443-d8ae",
+  "baselineTotalCents": 200000,
+  "jarSha256": {
+    "api": "f612600638c44c984134c0741a6753be0d260e823a441d17bb6d1b5f71ecd8fc",
+    "worker": "733342a680cfeded1cc5776ff1b08b874e00ba4d7325e9a138a262d69a0f9386"
+  },
+  "baselineRedis": {
+    "http": 500,
+    "body": {
+      "code": "INTERNAL_ERROR",
+      "message": "系统内部错误",
+      "data": null
+    },
+    "retryAfter": null,
+    "state": {
+      "status": "PUBLISHED",
+      "round": 0,
+      "version": 1,
+      "slot": 0,
+      "owner": -1
+    }
+  },
+  "failure": "['docker', 'exec', '-e', 'MYSQL_PWD=[REDACTED]', '-i', 'dash-mysql', 'mysql', '-uroot', '--default-character-set=utf8mb4', '-N', '-B', 'campus_dash_verify_fault_20261020_215443_d8ae']: ERROR 1054 (42S22) at line 2: Unknown column 'settled_at' in 'field list'\n",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/scripts/verify-fault-recovery.py\", line 489, in <module>\n    if args.baseline_probe:baseline_probe()\n                           ~~~~~~~~~~~~~~^^\n  File \"/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/scripts/verify-fault-recovery.py\", line 315, in baseline_probe\n    row=sql(f\"SELECT TIMESTAMPDIFF(MICROSECOND,DATE_ADD(e.delivered_at,INTERVAL 45 SECOND),s.created_at) FROM errand e JOIN errand_status_log s ON s.errand_id=e.id AND s.to_status='SETTLED' WHERE e.id={int(auto)}\")\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/scripts/verify-fault-recovery.py\", line 32, in sql\n    return command(args,input=\"SET time_zone='+08:00';\\n\"+query,timeout=30)\n  File \"/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/scripts/verify-fault-recovery.py\", line 27, in command\n    if result.returncode: raise RuntimeError(str(args)+': '+result.stderr[-3000:]+result.stdout[-3000:])\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: ['docker', 'exec', '-e', 'MYSQL_PWD=[REDACTED]', '-i', 'dash-mysql', 'mysql', '-uroot', '--default-character-set=utf8mb4', '-N', '-B', 'campus_dash_verify_fault_20261020_215443_d8ae']: ERROR 1054 (42S22) at line 2: Unknown column 'settled_at' in 'field list'\n\n",
+  "businessPassed": false,
+  "cleanup": {
+    "java": [
+      {
+        "pid": 61350,
+        "stopped": true,
+        "exitCode": 143
+      },
+      {
+        "pid": 61942,
+        "stopped": true,
+        "exitCode": -9
+      }
+    ],
+    "containers": [
+      {
+        "name": "dash-fault-20261020-215443-d8ae-broker",
+        "kind": "container",
+        "before": {
+          "exists": true,
+          "ownerRunId": "20261020-215443-d8ae",
+          "error": null
+        },
+        "removed": true,
+        "logsExitCode": 0,
+        "brokerLogsExitCode": 0,
+        "removal": {
+          "exitCode": 0,
+          "stdout": "dash-fault-20261020-215443-d8ae-broker\n",
+          "stderr": ""
+        },
+        "after": {
+          "exists": false,
+          "ownerRunId": null,
+          "error": null
+        }
+      },
+      {
+        "name": "dash-fault-20261020-215443-d8ae-namesrv",
+        "kind": "container",
+        "before": {
+          "exists": true,
+          "ownerRunId": "20261020-215443-d8ae",
+          "error": null
+        },
+        "removed": true,
+        "logsExitCode": 0,
+        "brokerLogsExitCode": 0,
+        "removal": {
+          "exitCode": 0,
+          "stdout": "dash-fault-20261020-215443-d8ae-namesrv\n",
+          "stderr": ""
+        },
+        "after": {
+          "exists": false,
+          "ownerRunId": null,
+          "error": null
+        }
+      },
+      {
+        "name": "dash-fault-20261020-215443-d8ae-redis",
+        "kind": "container",
+        "before": {
+          "exists": true,
+          "ownerRunId": "20261020-215443-d8ae",
+          "error": null
+        },
+        "removed": true,
+        "logsExitCode": 0,
+        "removal": {
+          "exitCode": 0,
+          "stdout": "dash-fault-20261020-215443-d8ae-redis\n",
+          "stderr": ""
+        },
+        "after": {
+          "exists": false,
+          "ownerRunId": null,
+          "error": null
+        }
+      }
+    ],
+    "network": {
+      "name": "dash-fault-20261020-215443-d8ae",
+      "kind": "network",
+      "before": {
+        "exists": true,
+        "ownerRunId": "20261020-215443-d8ae",
+        "error": null
+      },
+      "removed": true,
+      "removal": {
+        "exitCode": 0,
+        "stdout": "dash-fault-20261020-215443-d8ae\n",
+        "stderr": ""
+      },
+      "after": {
+        "exists": false,
+        "ownerRunId": null,
+        "error": null
+      }
+    },
+    "errors": [],
+    "passed": true
+  },
+  "finishedAt": "2026-10-20T21:56:52.128827"
+}

@@ -1,0 +1,39 @@
+{
+  "runId": "20261020-203700-cf3c",
+  "database": "campus_dash_verify_live_20261020_203700_cf3c",
+  "startedAt": "2026-10-20T20:37:00.636154",
+  "passed": false,
+  "checks": [],
+  "environment": {
+    "mysql": "8.0.40",
+    "redis": "7.4",
+    "rocketmq": "5.3.1",
+    "confirmSeconds": 30,
+    "autoSettleSeconds": 45,
+    "scanIntervalMillis": 600000,
+    "defaultRunnerRateLimits": true
+  },
+  "logs": {
+    "api": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-203700-cf3c/api.log",
+    "worker": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-203700-cf3c/worker.log"
+  },
+  "ports": {
+    "redis": 58581,
+    "mq": 58582,
+    "api": 58583
+  },
+  "network": "dash-live-20261020-203700-cf3c",
+  "baselineTotalCents": 200000,
+  "jarSha256": {
+    "api": "f612600638c44c984134c0741a6753be0d260e823a441d17bb6d1b5f71ecd8fc",
+    "worker": "733342a680cfeded1cc5776ff1b08b874e00ba4d7325e9a138a262d69a0f9386"
+  },
+  "javaPids": [
+    66745,
+    66746
+  ],
+  "failure": "Java process stopped: 66746",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/campus-live-api-mq.py\", line 74, in <module>\n    until(ready)\n    ~~~~~^^^^^^^\n  File \"/tmp/campus-live-api-mq.py\", line 27, in until\n    if p.poll() is not None: raise RuntimeError('Java process stopped: '+str(p.pid))\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Java process stopped: 66746\n",
+  "processesStopped": true,
+  "finishedAt": "2026-10-20T20:37:54.228836"
+}

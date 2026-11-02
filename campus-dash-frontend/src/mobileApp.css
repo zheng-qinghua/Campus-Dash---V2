@@ -1,0 +1,105 @@
+/* 手机端采用独立的应用框架，桌面仍保留工作台布局。 */
+.mobile-app-title, .mobile-back, .mobile-menu-avatar, .mobile-profile-trigger, .mobile-bottom-nav { display: none; }
+
+@media (max-width: 600px) {
+  html { scroll-padding-top: 64px; }
+  body { overscroll-behavior-y: none; }
+  .app { min-height: 100dvh; }
+  .app .topbar { position: sticky; top: 0; z-index: 30; height: 52px; padding: 0 16px; gap: 8px; background: #fff; border-bottom: 1px solid #ededed; }
+  .app .topbar-left, .app .topbar-right { gap: 8px; min-width: 0; }
+  .app .breadcrumb, .app .environment-label, .app .topbar-campus, .app .topbar-avatar { display: none; }
+  .app .mobile-app-title { display: flex; align-items: center; gap: 9px; }
+  .mobile-app-title h1 { font-size: 18px; font-weight: 700; letter-spacing: -.4px; white-space: nowrap; }
+  .mobile-app-title > span { display: inline-flex; align-items: center; gap: 4px; color: #777; font-size: 10px; white-space: nowrap; }
+  .mobile-app-title i { width: 4px; height: 4px; background: #ddad00; border-radius: 50%; }
+  .app .mobile-menu { display: none; width: 40px; height: 44px; padding: 0; border: 0; background: transparent; }
+  .app .mobile-menu > svg { display: none; }
+  .app .mobile-menu-avatar { display: grid; place-items: center; width: 32px; height: 32px; background: var(--primary); border-radius: 11px; font-size: 18px; font-weight: 650; color: #302b16; }
+  .app .mobile-back { display: grid; place-items: center; width: 32px; height: 44px; margin-left: -6px; }
+  .app-route-square .mobile-menu { display: grid; }
+  .app-route-square .mobile-back, .app-route-square .mobile-profile-trigger { display: none; }
+  .app .notification-button { width: 38px; height: 44px; border: 0; background: transparent; border-radius: 10px; }
+  .app .notification-button i { top: 10px; right: 8px; width: 6px; height: 6px; }
+  .app .mobile-profile-trigger { display: grid; place-items: center; width: 36px; height: 44px; padding: 0; font-size: 15px; font-weight: 650; color: #5c4b00; background: radial-gradient(circle at center, #fff3b8 15px, transparent 16px); }
+  .app-route-square .mobile-profile-trigger { display: none; }
+  .app .main { margin: 0; padding: 12px 16px calc(88px + env(safe-area-inset-bottom)); }
+  .app .content { max-width: 600px; }
+  .app .workspace-footer { display: none; }
+  .mobile-bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 32; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); height: calc(68px + env(safe-area-inset-bottom)); padding: 4px 8px calc(4px + env(safe-area-inset-bottom)); border-top: 1px solid #e9e9e9; background: #fff; box-shadow: 0 -5px 22px #00000003; }
+  .mobile-tab { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 3px; color: #898989; min-width: 0; border-radius: 10px; }
+  .mobile-tab > span { display: grid; place-items: center; width: 37px; height: 29px; border-radius: 10px; }
+  .mobile-tab strong { font-size: 10px; font-weight: 500; line-height: 1.3; }
+  .mobile-tab.is-current { color: #222; }
+  .mobile-tab.is-current > span { background: #fff2ad; }
+  .mobile-tab.is-current strong { font-weight: 700; }
+  .mobile-tab-publish > span { width: 40px; height: 32px; background: var(--primary); color: #222; border-radius: 11px; }
+  .mobile-tab-publish strong { color: #555; }
+  .app-route-publish .mobile-bottom-nav { display: none; }
+  .app .sidebar { z-index: 60; }
+  .app .nav-scrim { z-index: 59; }
+  .app .sidebar-close { width: 44px; height: 44px; top: 5px; right: 6px; }
+  .app .sidebar-guide { display: none; }
+  .app .sidebar .nav-item { min-height: 44px; }
+  .app .profile-select select { min-height: 36px; font-size: 12px; }
+  .app .logout-button { width: 40px; height: 44px; }
+  .app .toast { bottom: calc(82px + env(safe-area-inset-bottom)); max-width: calc(100vw - 24px); }
+  .app-route-mine .page-head { display: none; }
+  .app-route-mine .account-mine-switch { margin: 0 0 12px; }
+  .app-route-mine .account-mine-switch .tab, .app-route-mine .account-mine-switch .btn { min-height: 44px; }
+  .app-route-mine .account-task-stats { gap: 0; grid-template-columns: repeat(4,minmax(0,1fr)); margin-bottom: 12px; padding: 12px 0; background: #fff; border: 1px solid #e9e9e9; border-radius: 14px; }
+  .app-route-mine .account-task-stat { display: block; padding: 0 4px; border: 0; border-radius: 0; text-align: center; background: none; }
+  .app-route-mine .account-task-stat + .account-task-stat { border-left: 1px solid #eee; }
+  .app-route-mine .account-stat-symbol { display: none; }
+  .app-route-mine .account-task-stat strong { margin: 3px 0 0; font-size: 20px; }
+  .app-route-mine .account-task-stat span { font-size: 10px; }
+  .app-route-mine .account-task-stat small { display: none; }
+  .app-route-mine .account-mine-filter { gap: 10px; }
+  .app-route-mine .account-search input { min-height: 40px; font-size: 16px; }
+  .app-route-notifications .page-head > div, .app-route-notifications .account-message-aside { display: none; }
+  .app-route-notifications .page-head { justify-content: flex-end; margin-bottom: 8px; }
+  .app-route-notifications .page-head > .btn { min-height: 40px; }
+  .app-route-notifications .account-section-head { padding: 16px; }
+  .app-route-notifications .account-section-head h2 { font-size: 17px; }
+  .app-route-notifications .account-message { padding: 14px 12px; }
+
+  /* 登录以身份选择为中心，介绍与插图合并为一块轻量品牌头图。 */
+  .login-page { display: flex; flex-direction: column; min-height: 100dvh; background: #fff; }
+  .login-page .login-story { flex: none; min-height: 0; padding: 24px 24px 22px; border: 0; background: linear-gradient(145deg,#ffdc30 0%,#ffe774 62%,#fff2b2 100%); border-radius: 0 0 28px 28px; overflow: hidden; }
+  .login-page .login-story .brand { position: relative; z-index: 1; font-size: 22px; gap: 9px; }
+  .login-page .login-story .brand small { font-size: 9px; letter-spacing: 1px; color: #6c5d25; }
+  .login-page .login-story .brand-mark { width: 39px; height: 40px; background: #222; color: #ffd100; border: 0; border-radius: 12px; }
+  .login-page .login-story .brand-mark svg { width: 25px; height: 25px; }
+  .login-page .login-story-body { margin: 0; padding: 23px 0 0; }
+  .login-page .login-story-body .eyebrow, .login-page .login-story-body > p, .login-page .login-benefits, .login-page .login-copyright { display: none; }
+  .login-page .login-story h1 { font-size: 28px; line-height: 1.4; letter-spacing: -.6px; font-weight: 700; }
+  .login-page .login-story h1 em { color: #554514; }
+  .login-page .login-story .campus-art { display: block; position: absolute; top: auto; right: -10px; bottom: -8px; width: 155px; max-width: 40%; margin: 0; opacity: .5; }
+  .login-page .login-side { display: block; flex: 1; padding: 24px 24px calc(22px + env(safe-area-inset-bottom)); }
+  .login-page .login-card { max-width: 440px; margin: 0 auto; }
+  .login-page .login-card > .soft-label { padding: 0; background: none; color: #8b7014; font-size: 10px; letter-spacing: 1px; }
+  .login-page .login-card h2 { margin-top: 5px; font-size: 25px; font-weight: 700; }
+  .login-page .login-description { margin-top: 5px; font-size: 12px; }
+  .login-page .identity-list { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-top: 18px; }
+  .login-page .identity-btn { position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 10px; min-height: 154px; padding: 15px; border-radius: 16px; background: #fafafa; }
+  .login-page .identity-btn.identity-btn-personal { background: #fff9da; border-color: #e9cd5e; }
+  .login-page .identity-icon { width: 40px; height: 40px; border-radius: 12px; font-size: 24px; }
+  .login-page .identity-icon svg { width: 22px; height: 22px; }
+  .login-page .identity-copy { width: 100%; }
+  .login-page .identity-btn strong { display: block; font-size: 15px; line-height: 1.45; }
+  .login-page .identity-btn strong small { display: block; margin-top: 2px; font-size: 9px; }
+  .login-page .identity-btn .identity-copy > span { margin-top: 5px; font-size: 10px; line-height: 1.5; }
+  .login-page .identity-btn > svg { position: absolute; right: 13px; top: 25px; width: 15px; height: 15px; }
+  .login-page .identity-btn:hover:not(:disabled) { transform: none; background: #fff9da; }
+  .login-page .login-note { margin-top: 18px; padding-top: 15px; gap: 7px; }
+  .login-page .login-note p { font-size: 10px; line-height: 1.7; }
+  .login-page .login-note > svg { width: 13px; height: 13px; margin-top: 2px; }
+}
+@media (max-width: 360px) {
+  .app .topbar { padding-right: 12px; padding-left: 12px; }
+  .mobile-app-title > span { display: none; }
+  .app .main { padding-left: 12px; padding-right: 12px; }
+  .login-page .login-story { padding: 20px; }
+  .login-page .login-story h1 { font-size: 25px; }
+  .login-page .login-side { padding: 19px 18px; }
+  .login-page .identity-btn { padding: 12px; min-height: 150px; }
+}

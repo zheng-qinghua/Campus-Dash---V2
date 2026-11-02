@@ -1,0 +1,36 @@
+{
+  "runId": "20261020-215443-d8ae",
+  "jarSha256": {
+    "api": "f612600638c44c984134c0741a6753be0d260e823a441d17bb6d1b5f71ecd8fc",
+    "worker": "733342a680cfeded1cc5776ff1b08b874e00ba4d7325e9a138a262d69a0f9386"
+  },
+  "redisAuthFailure": {
+    "http": 500,
+    "body": {
+      "code": "INTERNAL_ERROR",
+      "message": "系统内部错误",
+      "data": null
+    },
+    "retryAfter": null,
+    "state": {
+      "status": "PUBLISHED",
+      "round": 0,
+      "version": 1,
+      "slot": 0,
+      "owner": -1
+    }
+  },
+  "automaticSettlement": {
+    "id": "238299329461391360",
+    "deliveredAt": "2026-10-20 21:56:28.513",
+    "settledAt": "2026-10-20 21:56:34.197",
+    "relativeToDeadlineMicros": -39316000,
+    "consumerLines": [
+      "2026-10-20T21:56:34.253+08:00  INFO 61942 --- [campus-dash-worker] [onsumption-2-53] c.campusdash.worker.AutoSettleConsumer   : 自动结算消息处理 errandId=238299329461391360 result=CONFLICT",
+      "2026-10-20T21:56:34.253+08:00  INFO 61942 --- [campus-dash-worker] [onsumption-2-52] c.campusdash.worker.AutoSettleConsumer   : 自动结算消息处理 errandId=238299329461391360 result=CONFLICT",
+      "2026-10-20T21:56:34.297+08:00  INFO 61942 --- [campus-dash-worker] [onsumption-2-54] c.campusdash.worker.AutoSettleConsumer   : 自动结算消息处理 errandId=238299329461391360 result=SETTLED"
+    ]
+  },
+  "scriptIssue": "基线脚本只读结果查询误用不存在的settled_at列，已修复；本文件用errand_status_log补取实际落库时间，不修改业务数据。",
+  "cleanupPassed": true
+}

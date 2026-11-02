@@ -1,0 +1,29 @@
+# 复制到仓库外受控配置文件，通过 DASH_IDENTITY_CONFIG 指向该文件；不要提交实际密钥。
+# 此模板不会自动启用；以下值必须由真实校园身份源提供。
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          campus:
+            provider: campus
+            client-id: ${CAMPUS_OIDC_CLIENT_ID}
+            client-secret: ${CAMPUS_OIDC_CLIENT_SECRET}
+            authorization-grant-type: authorization_code
+            redirect-uri: ${CAMPUS_OIDC_REDIRECT_URI}
+            scope: [openid]
+        provider:
+          campus:
+            issuer-uri: ${CAMPUS_OIDC_ISSUER}
+dash:
+  auth:
+    demo-login-enabled: false
+    allow-header-identity: false
+    session-namespace: production-v1
+    internal-token: ${DASH_INTERNAL_TOKEN}
+    oidc:
+      enabled: true
+      bindings:
+        - issuer: ${CAMPUS_OIDC_ISSUER}
+          subject: ${CAMPUS_OIDC_SUBJECT}
+          user-id: ${CAMPUS_LOCAL_USER_ID}

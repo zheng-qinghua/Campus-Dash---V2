@@ -1,0 +1,22 @@
+{
+  "database": "campus_dash_probe_commit_20261020_221244",
+  "probe": "Connector/J真实提交ACK丢失",
+  "mysqlConnector": "mysql-connector-j-9.5.0.jar",
+  "passed": true,
+  "stdout": "UNRELATED_BEFORE_ACK\nBIZ_PREFIX_COLLISION_ACK\nTARGET_ROLLBACK_ACK\nUNRELATED_AFTER_ROLLBACK_ACK\nTARGET_COMMIT_ACK_LOST:08S01\nUNRELATED_AFTER_DROP_ACK\n",
+  "stderr": "",
+  "exitCode": 0,
+  "observed": [
+    {
+      "event": "COMMIT_OK_DROPPED",
+      "bizNo": "settle:12"
+    }
+  ],
+  "persistedRows": [
+    "settle:12",
+    "settle:123",
+    "unrelated-after-drop",
+    "unrelated-after-rollback",
+    "unrelated-before"
+  ]
+}

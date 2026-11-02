@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "name": "UTF8自动结算",
+      "passed": true,
+      "expectedAccepted": true
+    },
+    {
+      "name": "ASCII损坏文案",
+      "passed": true,
+      "expectedAccepted": true
+    },
+    {
+      "name": "拒绝重复结算",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "name": "拒绝扫描替代",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "name": "拒绝其他消费者",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "name": "拒绝前缀订单ID",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "name": "拒绝结果前缀",
+      "passed": true,
+      "expectedAccepted": false
+    }
+  ],
+  "passed": true
+}

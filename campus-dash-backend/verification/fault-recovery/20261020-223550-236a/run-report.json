@@ -1,0 +1,1972 @@
+{
+  "runId": "20261020-223550-236a",
+  "database": "campus_dash_verify_fault_20261020_223550_236a",
+  "startedAt": "2026-10-20T22:35:50.516739",
+  "passed": false,
+  "checks": [
+    {
+      "name": "Redis BUSY鉴权明确退避",
+      "passed": true,
+      "evidence": {
+        "http": 503,
+        "body": {
+          "code": "DEPENDENCY_UNAVAILABLE",
+          "message": "依赖暂不可用，请保留原请求标识重试",
+          "data": null
+        },
+        "retryAfter": "1"
+      }
+    },
+    {
+      "name": "Redis BUSY恢复后原Session继续可用",
+      "passed": true,
+      "evidence": {
+        "http": 200,
+        "body": {
+          "code": "OK",
+          "message": "成功",
+          "data": {
+            "availableCents": "0",
+            "frozenCents": "0"
+          }
+        }
+      }
+    },
+    {
+      "name": "提前自动结算消息不动资金",
+      "passed": true,
+      "evidence": {
+        "status": "DELIVERED",
+        "round": 0,
+        "version": 5,
+        "slot": 1,
+        "owner": 12001
+      }
+    },
+    {
+      "name": "并发重复结算至多一次实际入账 238309581397331968",
+      "passed": true,
+      "evidence": [
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED",
+        "ALREADY_SETTLED"
+      ]
+    },
+    {
+      "name": "重复自动消息及并发手动重试不重复入账",
+      "passed": true,
+      "evidence": "escrow:238309581397331968\t1\tCREDIT\t1000\nescrow:238309581397331968\t11001\tDEBIT\t1000\nsettle:238309581397331968\t1\tDEBIT\t1000\nsettle:238309581397331968\t2\tCREDIT\t50\nsettle:238309581397331968\t12001\tCREDIT\t950"
+    },
+    {
+      "name": "重复资金事件只落两条通知且账本不变",
+      "passed": true,
+      "evidence": {
+        "ledger": "escrow:238309581397331968\t1\tCREDIT\t1000\nescrow:238309581397331968\t11001\tDEBIT\t1000\nsettle:238309581397331968\t1\tDEBIT\t1000\nsettle:238309581397331968\t2\tCREDIT\t50\nsettle:238309581397331968\t12001\tCREDIT\t950"
+      }
+    },
+    {
+      "name": "Redis不可用时鉴权关闭并明确退避",
+      "passed": true,
+      "evidence": {
+        "http": 503,
+        "body": {
+          "code": "DEPENDENCY_UNAVAILABLE",
+          "message": "依赖暂不可用，请保留原请求标识重试",
+          "data": null
+        },
+        "retryAfter": "1"
+      }
+    },
+    {
+      "name": "Redis故障拒绝请求未占订单",
+      "passed": true,
+      "evidence": {
+        "status": "PUBLISHED",
+        "round": 0,
+        "version": 1,
+        "slot": 0,
+        "owner": -1
+      }
+    },
+    {
+      "name": "Redis停机期间DB兜底释放名额",
+      "passed": true,
+      "evidence": {
+        "status": "PUBLISHED",
+        "round": 1,
+        "version": 3,
+        "slot": 0,
+        "owner": -1
+      }
+    },
+    {
+      "name": "Redis清空后旧Session失效而非冒用",
+      "passed": true,
+      "evidence": 401
+    },
+    {
+      "name": "Redis部分Bloom不能隐藏旧订单",
+      "passed": true,
+      "evidence": {
+        "detail": {
+          "id": "238309806505627648",
+          "title": "故障验收 20261020-223550-236a Redis丢失后已确认赢家",
+          "status": "ACCEPTED",
+          "type": "DELIVERY",
+          "rewardCents": "1000",
+          "slotTotal": 1,
+          "slotTaken": 1,
+          "publisherId": "11001",
+          "grabberId": "12001",
+          "round": 0,
+          "role": "CURRENT_RUNNER",
+          "availableActions": [
+            "PICKUP",
+            "DISPUTE"
+          ]
+        },
+        "mineIds": [
+          "238309807822639104",
+          "238309806505627648",
+          "238309581397331968"
+        ]
+      }
+    },
+    {
+      "name": "迟到负缓存不遮挡已提交订单",
+      "passed": true,
+      "evidence": {
+        "id": "238309806505627648",
+        "title": "故障验收 20261020-223550-236a Redis丢失后已确认赢家",
+        "status": "ACCEPTED",
+        "type": "DELIVERY",
+        "rewardCents": "1000",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "CURRENT_RUNNER",
+        "availableActions": [
+          "PICKUP",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "name": "Redis重启后原请求结果可从DB恢复",
+      "passed": true,
+      "evidence": {
+        "code": "OK",
+        "message": "成功",
+        "data": {
+          "code": "OK",
+          "grabbed": true,
+          "candidateRank": null,
+          "requestId": "a434c17b-4819-4c0a-a904-4292521e9d9b",
+          "status": "SUCCEEDED",
+          "appliedRound": 0,
+          "replayed": true,
+          "retryAfterMillis": "0",
+          "httpStatus": 200
+        }
+      }
+    },
+    {
+      "name": "Redis投影丢失不导致重复接单",
+      "passed": true,
+      "evidence": {
+        "code": "ERRAND_NOT_GRABBABLE",
+        "message": "任务当前不可抢",
+        "data": {
+          "code": "ERRAND_NOT_GRABBABLE",
+          "grabbed": false,
+          "candidateRank": null,
+          "requestId": "c6d51606-d22f-478c-aa6e-48ea5819d870",
+          "status": "REJECTED",
+          "appliedRound": 0,
+          "replayed": false,
+          "retryAfterMillis": "0",
+          "httpStatus": 409
+        }
+      }
+    },
+    {
+      "name": "Redis重建保留已确认赢家",
+      "passed": true,
+      "evidence": {
+        "status": "ACCEPTED",
+        "round": 0,
+        "version": 3,
+        "slot": 1,
+        "owner": 12001
+      }
+    },
+    {
+      "name": "依赖恢复后使用原UUID可正常抢单",
+      "passed": true,
+      "evidence": {
+        "code": "OK",
+        "message": "成功",
+        "data": {
+          "code": "OK",
+          "grabbed": true,
+          "candidateRank": null,
+          "requestId": "10ec7db2-29e7-44f3-89af-0c307890b111",
+          "status": "SUCCEEDED",
+          "appliedRound": 0,
+          "replayed": false,
+          "retryAfterMillis": "0",
+          "httpStatus": 200
+        }
+      }
+    },
+    {
+      "name": "宕机原UUID不会复活",
+      "passed": true,
+      "evidence": {
+        "code": "REQUEST_EXPIRED",
+        "message": "请求已过期",
+        "data": {
+          "code": "REQUEST_EXPIRED",
+          "grabbed": false,
+          "candidateRank": null,
+          "requestId": "5a1a4a84-6c9a-46e5-a584-4d6646cc971e",
+          "status": "EXPIRED",
+          "appliedRound": 0,
+          "replayed": true,
+          "retryAfterMillis": "0",
+          "httpStatus": 409
+        }
+      }
+    },
+    {
+      "name": "提交前宕机没有成功占用事实",
+      "passed": true,
+      "evidence": {
+        "status": "PUBLISHED",
+        "round": 0,
+        "version": 1,
+        "slot": 0,
+        "owner": -1
+      }
+    },
+    {
+      "name": "租约恢复后新请求恰好一个接单事实",
+      "passed": true,
+      "evidence": {
+        "status": "SETTLED",
+        "round": 0,
+        "version": 6,
+        "slot": 1,
+        "owner": 12002
+      }
+    },
+    {
+      "name": "提交后响应在代理被截断",
+      "passed": true,
+      "evidence": {
+        "http": 200,
+        "body": "{\"code\":\"OK\",\"message\":\"成功\",\"data\":{\"code\":\"OK\",\"grabbed\":true,\"candidateRank\":null,\"requestId\":\"a7a5f4cc-4673-4640-99fc-07b8505aefb3\",\"status\":\"SUCCEEDED\",\"appliedRound\":0,\"replayed\":false,\"retryAfterMillis\":\"0\",\"httpStatus\":200}}"
+      }
+    },
+    {
+      "name": "提交后宕机重放原UUID仍是同一赢家",
+      "passed": true,
+      "evidence": {
+        "code": "OK",
+        "message": "成功",
+        "data": {
+          "code": "OK",
+          "grabbed": true,
+          "candidateRank": null,
+          "requestId": "a7a5f4cc-4673-4640-99fc-07b8505aefb3",
+          "status": "SUCCEEDED",
+          "appliedRound": 0,
+          "replayed": true,
+          "retryAfterMillis": "0",
+          "httpStatus": 200
+        }
+      }
+    },
+    {
+      "name": "真实MySQL COMMIT成功ACK被截断",
+      "passed": true,
+      "evidence": {
+        "http": 500,
+        "body": {
+          "code": "INTERNAL_ERROR",
+          "message": "系统内部错误",
+          "data": null
+        },
+        "proxy": [
+          {
+            "event": "COMMIT_OK_DROPPED",
+            "bizNo": "settle:238310129206988800"
+          }
+        ]
+      }
+    },
+    {
+      "name": "提交不确定资金事件未被误回滚",
+      "passed": false,
+      "evidence": "238310129206988800"
+    }
+  ],
+  "environment": {
+    "mysql": "8.0.40",
+    "redis": "7.4",
+    "rocketmq": "5.3.1",
+    "confirmSeconds": 30,
+    "autoSettleSeconds": 45,
+    "scanIntervalMillis": 5000,
+    "redisTimeoutMillis": 1000,
+    "brokerTransactionCheckMillis": 5000,
+    "defaultRunnerRateLimits": true
+  },
+  "logs": {
+    "api-1": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/api-1.log",
+    "worker-1": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/worker-1.log",
+    "api-2": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/api-2.log",
+    "api-3": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/api-3.log"
+  },
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 277
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "requestId": null,
+      "http": 503,
+      "code": "DEPENDENCY_UNAVAILABLE",
+      "retryAfter": "1",
+      "elapsedMs": 13,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 171,
+      "data": {
+        "availableCents": "0",
+        "frozenCents": "0"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 130,
+      "data": {
+        "errandId": "238309581397331968",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/grab",
+      "actor": 12001,
+      "requestId": "d9dce3fc-6fc1-408d-bcbc-235f8f7f48a2",
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 1137,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "d9dce3fc-6fc1-408d-bcbc-235f8f7f48a2",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/confirm",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 27,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/pickup",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 23,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/deliver",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 20,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 11,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 11,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 15,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 15,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 16,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 16,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 15,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 17,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309581397331968/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 18,
+      "data": {
+        "result": "ALREADY_SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 31,
+      "data": {
+        "errandId": "238309806505627648",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309806505627648/grab",
+      "actor": 12001,
+      "requestId": "a434c17b-4819-4c0a-a904-4292521e9d9b",
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 62,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "a434c17b-4819-4c0a-a904-4292521e9d9b",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309806505627648/confirm",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 27,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 31,
+      "data": {
+        "errandId": "238309807822639104",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309807822639104/grab",
+      "actor": 12001,
+      "requestId": "55199834-5865-4cfe-b39a-8a94f88b6670",
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 62,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "55199834-5865-4cfe-b39a-8a94f88b6670",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 25,
+      "data": {
+        "errandId": "238309808762163200",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309808762163200/grab",
+      "actor": 12001,
+      "requestId": "10ec7db2-29e7-44f3-89af-0c307890b111",
+      "http": 503,
+      "code": "DEPENDENCY_UNAVAILABLE",
+      "retryAfter": "1",
+      "elapsedMs": 1017,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "requestId": null,
+      "http": 503,
+      "code": "DEPENDENCY_UNAVAILABLE",
+      "retryAfter": "1",
+      "elapsedMs": 1012,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "requestId": null,
+      "http": 401,
+      "code": "EMPTY_OR_INVALID_BODY",
+      "retryAfter": null,
+      "elapsedMs": 974,
+      "data": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/wallet",
+      "actor": 12001,
+      "requestId": null,
+      "http": 401,
+      "code": "EMPTY_OR_INVALID_BODY",
+      "retryAfter": null,
+      "elapsedMs": 2,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 2
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 36,
+      "data": {
+        "errandId": "238309951435608064",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238309806505627648",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": {
+        "id": "238309806505627648",
+        "title": "故障验收 20261020-223550-236a Redis丢失后已确认赢家",
+        "status": "ACCEPTED",
+        "type": "DELIVERY",
+        "rewardCents": "1000",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "CURRENT_RUNNER",
+        "availableActions": [
+          "PICKUP",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/mine?role=GRABBED_BY_ME",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 10,
+      "data": [
+        {
+          "id": "238309807822639104",
+          "title": "故障验收 20261020-223550-236a Redis停机期间到期回池",
+          "status": "PUBLISHED",
+          "type": "DELIVERY",
+          "rewardCents": "1000",
+          "slotTotal": 1,
+          "slotTaken": 0,
+          "publisherId": "11001",
+          "grabberId": "-1",
+          "round": 1,
+          "role": "VIEWER",
+          "availableActions": [
+            "GRAB"
+          ]
+        },
+        {
+          "id": "238309806505627648",
+          "title": "故障验收 20261020-223550-236a Redis丢失后已确认赢家",
+          "status": "ACCEPTED",
+          "type": "DELIVERY",
+          "rewardCents": "1000",
+          "slotTotal": 1,
+          "slotTaken": 1,
+          "publisherId": "11001",
+          "grabberId": "12001",
+          "round": 0,
+          "role": "CURRENT_RUNNER",
+          "availableActions": [
+            "PICKUP",
+            "DISPUTE"
+          ]
+        },
+        {
+          "id": "238309581397331968",
+          "title": "故障验收 20261020-223550-236a 提前及重复自动结算",
+          "status": "SETTLED",
+          "type": "DELIVERY",
+          "rewardCents": "1000",
+          "slotTotal": 1,
+          "slotTaken": 1,
+          "publisherId": "11001",
+          "grabberId": "12001",
+          "round": 0,
+          "role": "CURRENT_RUNNER",
+          "availableActions": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238309806505627648",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "id": "238309806505627648",
+        "title": "故障验收 20261020-223550-236a Redis丢失后已确认赢家",
+        "status": "ACCEPTED",
+        "type": "DELIVERY",
+        "rewardCents": "1000",
+        "slotTotal": 1,
+        "slotTaken": 1,
+        "publisherId": "11001",
+        "grabberId": "12001",
+        "round": 0,
+        "role": "CURRENT_RUNNER",
+        "availableActions": [
+          "PICKUP",
+          "DISPUTE"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309951435608064/cancel",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 66,
+      "data": {
+        "result": "REFUNDED"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/errands/238309806505627648/grab-requests/a434c17b-4819-4c0a-a904-4292521e9d9b",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 7,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "a434c17b-4819-4c0a-a904-4292521e9d9b",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": true,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309806505627648/grab",
+      "actor": 12002,
+      "requestId": "c6d51606-d22f-478c-aa6e-48ea5819d870",
+      "http": 409,
+      "code": "ERRAND_NOT_GRABBABLE",
+      "retryAfter": null,
+      "elapsedMs": 33,
+      "data": {
+        "code": "ERRAND_NOT_GRABBABLE",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "c6d51606-d22f-478c-aa6e-48ea5819d870",
+        "status": "REJECTED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 409
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309806505627648/pickup",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 25,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309806505627648/deliver",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 23,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309806505627648/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 38,
+      "data": {
+        "result": "SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309807822639104/cancel",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 28,
+      "data": {
+        "result": "REFUNDED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309808762163200/grab",
+      "actor": 12001,
+      "requestId": "10ec7db2-29e7-44f3-89af-0c307890b111",
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 39,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "10ec7db2-29e7-44f3-89af-0c307890b111",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309808762163200/confirm",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 17,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309808762163200/pickup",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 18,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309808762163200/deliver",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 17,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309808762163200/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 32,
+      "data": {
+        "result": "SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 17,
+      "data": {
+        "errandId": "238309956141617152",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309956141617152/grab",
+      "actor": 12001,
+      "requestId": "5a1a4a84-6c9a-46e5-a584-4d6646cc971e",
+      "transportError": "RemoteDisconnected"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 268
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 4
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309956141617152/grab",
+      "actor": 12001,
+      "requestId": "5a1a4a84-6c9a-46e5-a584-4d6646cc971e",
+      "http": 409,
+      "code": "REQUEST_EXPIRED",
+      "retryAfter": null,
+      "elapsedMs": 240,
+      "data": {
+        "code": "REQUEST_EXPIRED",
+        "grabbed": false,
+        "candidateRank": null,
+        "requestId": "5a1a4a84-6c9a-46e5-a584-4d6646cc971e",
+        "status": "EXPIRED",
+        "appliedRound": 0,
+        "replayed": true,
+        "retryAfterMillis": "0",
+        "httpStatus": 409
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309956141617152/grab",
+      "actor": 12002,
+      "requestId": "2c8c9945-ad64-4545-b278-4c235e0c4a19",
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 1369,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "2c8c9945-ad64-4545-b278-4c235e0c4a19",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309956141617152/confirm",
+      "actor": 12002,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 22,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309956141617152/pickup",
+      "actor": 12002,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 18,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309956141617152/deliver",
+      "actor": 12002,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 17,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238309956141617152/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 76,
+      "data": {
+        "result": "SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 86,
+      "data": {
+        "errandId": "238310096990539776",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310096990539776/grab",
+      "actor": 12001,
+      "requestId": "a7a5f4cc-4673-4640-99fc-07b8505aefb3",
+      "transportError": "RemoteDisconnected"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 264
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 4
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "actor": null,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 3
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310096990539776/grab",
+      "actor": 12001,
+      "requestId": "a7a5f4cc-4673-4640-99fc-07b8505aefb3",
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 224,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "a7a5f4cc-4673-4640-99fc-07b8505aefb3",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": true,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310096990539776/confirm",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 1116,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310096990539776/pickup",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 44,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310096990539776/deliver",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 47,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310096990539776/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 140,
+      "data": {
+        "result": "SETTLED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands",
+      "actor": 11001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 89,
+      "data": {
+        "errandId": "238310129206988800",
+        "status": "PUBLISHED",
+        "frozenCents": "1000"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310129206988800/grab",
+      "actor": 12001,
+      "requestId": "d42b73d1-7de9-4cc0-af2a-4731dc1510b9",
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 199,
+      "data": {
+        "code": "OK",
+        "grabbed": true,
+        "candidateRank": null,
+        "requestId": "d42b73d1-7de9-4cc0-af2a-4731dc1510b9",
+        "status": "SUCCEEDED",
+        "appliedRound": 0,
+        "replayed": false,
+        "retryAfterMillis": "0",
+        "httpStatus": 200
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310129206988800/confirm",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 52,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310129206988800/pickup",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 27,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310129206988800/deliver",
+      "actor": 12001,
+      "requestId": null,
+      "http": 200,
+      "code": "OK",
+      "retryAfter": null,
+      "elapsedMs": 34,
+      "data": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/errands/238310129206988800/settle",
+      "actor": 11001,
+      "requestId": null,
+      "http": 500,
+      "code": "INTERNAL_ERROR",
+      "retryAfter": null,
+      "elapsedMs": 51,
+      "data": null
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-10-20T22:37:05.199017",
+      "name": "服务启动",
+      "service": "api",
+      "pid": 85873,
+      "log": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/api-1.log",
+      "scanMillis": 5000
+    },
+    {
+      "at": "2026-10-20T22:37:10.721675",
+      "name": "服务启动",
+      "service": "worker",
+      "pid": 85911,
+      "log": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/worker-1.log",
+      "scanMillis": 5000
+    },
+    {
+      "at": "2026-10-20T22:37:11.478037",
+      "name": "Redis只读脚本触发BUSY"
+    },
+    {
+      "at": "2026-10-20T22:37:16.336366",
+      "name": "重复消息已实际投递",
+      "topic": "errand-auto-settle",
+      "key": "autosettle:238309581397331968",
+      "count": 5
+    },
+    {
+      "at": "2026-10-20T22:38:02.521356",
+      "name": "重复消息已实际投递",
+      "topic": "errand-auto-settle",
+      "key": "autosettle:238309581397331968",
+      "count": 10
+    },
+    {
+      "at": "2026-10-20T22:38:05.304236",
+      "name": "重复消息已实际投递",
+      "topic": "errand-fund-event",
+      "key": "settle:238309581397331968",
+      "count": 10
+    },
+    {
+      "at": "2026-10-20T22:38:06.292487",
+      "name": "容器故障操作",
+      "action": "kill",
+      "container": "dash-fault-20261020-223550-236a-redis"
+    },
+    {
+      "at": "2026-10-20T22:38:37.630006",
+      "name": "容器故障操作",
+      "action": "start",
+      "container": "dash-fault-20261020-223550-236a-redis"
+    },
+    {
+      "at": "2026-10-20T22:38:40.415510",
+      "name": "注入迟到负缓存",
+      "errandId": "238309806505627648",
+      "shards": 4
+    },
+    {
+      "at": "2026-10-20T22:38:41.263515",
+      "name": "仅持有订单行锁",
+      "errandId": "238309956141617152",
+      "connectionId": 10305
+    },
+    {
+      "at": "2026-10-20T22:38:41.425593",
+      "name": "确认宕机窗口",
+      "errandId": "238309956141617152",
+      "requestId": "5a1a4a84-6c9a-46e5-a584-4d6646cc971e",
+      "pending": [
+        "238309956733014016",
+        "5845ef3b-b221-44d0-b713-0f7c3bbb765a",
+        "2026-10-20 22:39:11.271"
+      ]
+    },
+    {
+      "at": "2026-10-20T22:38:41.448185",
+      "name": "SIGKILL服务",
+      "service": "api",
+      "pid": 85873,
+      "exitCode": -9
+    },
+    {
+      "at": "2026-10-20T22:38:41.501214",
+      "name": "释放本轮行锁连接",
+      "connectionId": 10305
+    },
+    {
+      "at": "2026-10-20T22:38:45.615016",
+      "name": "服务启动",
+      "service": "api",
+      "pid": 86830,
+      "log": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/api-2.log",
+      "scanMillis": 5000
+    },
+    {
+      "at": "2026-10-20T22:39:14.993721",
+      "name": "SIGKILL服务",
+      "service": "api",
+      "pid": 86830,
+      "exitCode": -9
+    },
+    {
+      "at": "2026-10-20T22:39:20.318157",
+      "name": "服务启动",
+      "service": "api",
+      "pid": 87020,
+      "log": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/api-3.log",
+      "scanMillis": 5000
+    }
+  ],
+  "tasks": {
+    "提前及重复自动结算": {
+      "id": "238309581397331968",
+      "reward": 1000,
+      "expected": "SETTLED"
+    },
+    "Redis丢失后已确认赢家": {
+      "id": "238309806505627648",
+      "reward": 1000,
+      "expected": "SETTLED"
+    },
+    "Redis停机期间到期回池": {
+      "id": "238309807822639104",
+      "reward": 1000,
+      "expected": "CANCELLED"
+    },
+    "Redis恢复后原UUID重试": {
+      "id": "238309808762163200",
+      "reward": 1000,
+      "expected": "SETTLED"
+    },
+    "Redis清空后新单与旧单详情": {
+      "id": "238309951435608064",
+      "reward": 1000,
+      "expected": "CANCELLED"
+    },
+    "API占位后提交前宕机": {
+      "id": "238309956141617152",
+      "reward": 1000,
+      "expected": "SETTLED"
+    },
+    "API提交后响应丢失与重启": {
+      "id": "238310096990539776",
+      "reward": 1000,
+      "expected": "SETTLED"
+    },
+    "数据库提交ACK丢失": {
+      "id": "238310129206988800",
+      "reward": 1000,
+      "expected": "SETTLED"
+    }
+  },
+  "mqSends": [
+    {
+      "topic": "errand-auto-settle",
+      "key": "autosettle:238309581397331968",
+      "count": 5,
+      "evidence": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/mq-send-1.json",
+      "receipt": {
+        "ok": true,
+        "startedAt": "2026-10-20T14:37:14.821687Z",
+        "endpoints": "127.0.0.1:62641",
+        "topic": "errand-auto-settle",
+        "key": "autosettle:238309581397331968",
+        "tag": "",
+        "mode": "delay",
+        "countRequested": 5,
+        "countSent": 5,
+        "countPublished": 5,
+        "payloadSha256": "b4c8acba19cf435d0f105ec06a07e853344bfa6bd1ce344c2e7bc0d0192f3e39",
+        "receipts": [
+          {
+            "index": 0,
+            "messageId": "01AA5493C2DEF94FFF0AE9169B00000000",
+            "acknowledgedAt": "2026-10-20T14:37:15.871929Z"
+          },
+          {
+            "index": 1,
+            "messageId": "01AA5493C2DEF94FFF0AE9169B00000001",
+            "acknowledgedAt": "2026-10-20T14:37:15.877556Z"
+          },
+          {
+            "index": 2,
+            "messageId": "01AA5493C2DEF94FFF0AE9169B00000002",
+            "acknowledgedAt": "2026-10-20T14:37:15.882449Z"
+          },
+          {
+            "index": 3,
+            "messageId": "01AA5493C2DEF94FFF0AE9169B00000003",
+            "acknowledgedAt": "2026-10-20T14:37:15.886737Z"
+          },
+          {
+            "index": 4,
+            "messageId": "01AA5493C2DEF94FFF0AE9169B00000004",
+            "acknowledgedAt": "2026-10-20T14:37:15.891647Z"
+          }
+        ],
+        "outcomeUnknown": false,
+        "deliveryTimestamp": "1792507036816",
+        "finishedAt": "2026-10-20T14:37:15.904691Z",
+        "buildSha256": "f6f5dd1e9a0435f6d81e703cbb27b76c1c38672144a32c87fb0915afeffa64bc",
+        "javaExitCode": 0
+      }
+    },
+    {
+      "topic": "errand-auto-settle",
+      "key": "autosettle:238309581397331968",
+      "count": 10,
+      "evidence": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/mq-send-2.json",
+      "receipt": {
+        "ok": true,
+        "startedAt": "2026-10-20T14:37:59.838688Z",
+        "endpoints": "127.0.0.1:62641",
+        "topic": "errand-auto-settle",
+        "key": "autosettle:238309581397331968",
+        "tag": "",
+        "mode": "delay",
+        "countRequested": 10,
+        "countSent": 10,
+        "countPublished": 10,
+        "payloadSha256": "b4c8acba19cf435d0f105ec06a07e853344bfa6bd1ce344c2e7bc0d0192f3e39",
+        "receipts": [
+          {
+            "index": 0,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000000",
+            "acknowledgedAt": "2026-10-20T14:38:01.820871Z"
+          },
+          {
+            "index": 1,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000001",
+            "acknowledgedAt": "2026-10-20T14:38:01.825583Z"
+          },
+          {
+            "index": 2,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000002",
+            "acknowledgedAt": "2026-10-20T14:38:01.829695Z"
+          },
+          {
+            "index": 3,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000003",
+            "acknowledgedAt": "2026-10-20T14:38:02.039146Z"
+          },
+          {
+            "index": 4,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000004",
+            "acknowledgedAt": "2026-10-20T14:38:02.046276Z"
+          },
+          {
+            "index": 5,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000005",
+            "acknowledgedAt": "2026-10-20T14:38:02.051563Z"
+          },
+          {
+            "index": 6,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000006",
+            "acknowledgedAt": "2026-10-20T14:38:02.055878Z"
+          },
+          {
+            "index": 7,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000007",
+            "acknowledgedAt": "2026-10-20T14:38:02.059963Z"
+          },
+          {
+            "index": 8,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000008",
+            "acknowledgedAt": "2026-10-20T14:38:02.063941Z"
+          },
+          {
+            "index": 9,
+            "messageId": "01AA5493C2DEF9518D0AE916C900000009",
+            "acknowledgedAt": "2026-10-20T14:38:02.069626Z"
+          }
+        ],
+        "outcomeUnknown": false,
+        "deliveryTimestamp": "1792507082765",
+        "finishedAt": "2026-10-20T14:38:02.081755Z",
+        "buildSha256": "f6f5dd1e9a0435f6d81e703cbb27b76c1c38672144a32c87fb0915afeffa64bc",
+        "javaExitCode": 0
+      }
+    },
+    {
+      "topic": "errand-fund-event",
+      "key": "settle:238309581397331968",
+      "count": 10,
+      "evidence": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/fault-recovery/20261020-223550-236a/mq-send-3.json",
+      "receipt": {
+        "ok": true,
+        "startedAt": "2026-10-20T14:38:03.666114Z",
+        "endpoints": "127.0.0.1:62641",
+        "topic": "errand-fund-event",
+        "key": "settle:238309581397331968",
+        "tag": "SETTLED",
+        "mode": "transaction",
+        "countRequested": 10,
+        "countSent": 10,
+        "countPublished": 10,
+        "payloadSha256": "390d2a364f11d735da72fcb41a8c4583199444bfd1ee7e28ec8de222f02601a2",
+        "receipts": [
+          {
+            "index": 0,
+            "messageId": "01AA5493C2DEF951A10AE916CC00000001",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.768678Z"
+          },
+          {
+            "index": 1,
+            "messageId": "01AA5493C2DEF951A10AE916CC00000003",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.779456Z"
+          },
+          {
+            "index": 2,
+            "messageId": "01AA5493C2DEF951A10AE916CC00000005",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.792374Z"
+          },
+          {
+            "index": 3,
+            "messageId": "01AA5493C2DEF951A10AE916CC00000007",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.808044Z"
+          },
+          {
+            "index": 4,
+            "messageId": "01AA5493C2DEF951A10AE916CC00000009",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.816495Z"
+          },
+          {
+            "index": 5,
+            "messageId": "01AA5493C2DEF951A10AE916CC0000000B",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.825497Z"
+          },
+          {
+            "index": 6,
+            "messageId": "01AA5493C2DEF951A10AE916CC0000000D",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.832530Z"
+          },
+          {
+            "index": 7,
+            "messageId": "01AA5493C2DEF951A10AE916CC0000000F",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.840158Z"
+          },
+          {
+            "index": 8,
+            "messageId": "01AA5493C2DEF951A10AE916CC00000011",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.849113Z"
+          },
+          {
+            "index": 9,
+            "messageId": "01AA5493C2DEF951A10AE916CC00000013",
+            "transactionCommitted": true,
+            "acknowledgedAt": "2026-10-20T14:38:04.856782Z"
+          }
+        ],
+        "outcomeUnknown": false,
+        "finishedAt": "2026-10-20T14:38:04.870169Z",
+        "buildSha256": "f6f5dd1e9a0435f6d81e703cbb27b76c1c38672144a32c87fb0915afeffa64bc",
+        "javaExitCode": 0
+      }
+    }
+  ],
+  "baselineProbe": false,
+  "ports": {
+    "redis": 62640,
+    "mq": 62641,
+    "api": 62642
+  },
+  "mysqlProxyPort": 62643,
+  "network": "dash-fault-20261020-223550-236a",
+  "baselineTotalCents": 200000,
+  "jarSha256": {
+    "api": "86138ae1f1b3df773cb98cca3304c5407dc650234c9099ad4a3f38aaf493ad9a",
+    "worker": "2b4f9a1d6728f7c1561f4295f868200b02ed0fc6bf13295c3aa73eb957c7953c"
+  },
+  "failure": "提交不确定资金事件未被误回滚: 238310129206988800",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/scripts/verify-fault-recovery.py\", line 548, in <module>\n    else:full_scenarios();final_invariants();report['passed']=True\n         ~~~~~~~~~~~~~~^^\n  File \"/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/scripts/verify-fault-recovery.py\", line 444, in full_scenarios\n    check('提交不确定资金事件未被误回滚',any(f'bizNo=settle:{ack}' in x and '流水存在=true' in x for path in out.glob('api-*.log') for x in path.read_text().splitlines()),ack)\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/scripts/verify-fault-recovery.py\", line 50, in check\n    if not valid: raise AssertionError(name+': '+str(evidence))\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 提交不确定资金事件未被误回滚: 238310129206988800\n",
+  "businessPassed": false,
+  "cleanup": {
+    "java": [
+      {
+        "pid": 85873,
+        "stopped": true,
+        "exitCode": -9
+      },
+      {
+        "pid": 85911,
+        "stopped": true,
+        "exitCode": -9
+      },
+      {
+        "pid": 86830,
+        "stopped": true,
+        "exitCode": -9
+      },
+      {
+        "pid": 87020,
+        "stopped": true,
+        "exitCode": 143
+      }
+    ],
+    "containers": [
+      {
+        "name": "dash-fault-20261020-223550-236a-broker",
+        "kind": "container",
+        "before": {
+          "exists": true,
+          "ownerRunId": "20261020-223550-236a",
+          "error": null
+        },
+        "removed": true,
+        "logsExitCode": 0,
+        "brokerLogsExitCode": 0,
+        "removal": {
+          "exitCode": 0,
+          "stdout": "dash-fault-20261020-223550-236a-broker\n",
+          "stderr": ""
+        },
+        "after": {
+          "exists": false,
+          "ownerRunId": null,
+          "error": null
+        }
+      },
+      {
+        "name": "dash-fault-20261020-223550-236a-namesrv",
+        "kind": "container",
+        "before": {
+          "exists": true,
+          "ownerRunId": "20261020-223550-236a",
+          "error": null
+        },
+        "removed": true,
+        "logsExitCode": 0,
+        "brokerLogsExitCode": 0,
+        "removal": {
+          "exitCode": 0,
+          "stdout": "dash-fault-20261020-223550-236a-namesrv\n",
+          "stderr": ""
+        },
+        "after": {
+          "exists": false,
+          "ownerRunId": null,
+          "error": null
+        }
+      },
+      {
+        "name": "dash-fault-20261020-223550-236a-redis",
+        "kind": "container",
+        "before": {
+          "exists": true,
+          "ownerRunId": "20261020-223550-236a",
+          "error": null
+        },
+        "removed": true,
+        "logsExitCode": 0,
+        "removal": {
+          "exitCode": 0,
+          "stdout": "dash-fault-20261020-223550-236a-redis\n",
+          "stderr": ""
+        },
+        "after": {
+          "exists": false,
+          "ownerRunId": null,
+          "error": null
+        }
+      }
+    ],
+    "network": {
+      "name": "dash-fault-20261020-223550-236a",
+      "kind": "network",
+      "before": {
+        "exists": true,
+        "ownerRunId": "20261020-223550-236a",
+        "error": null
+      },
+      "removed": true,
+      "removal": {
+        "exitCode": 0,
+        "stdout": "dash-fault-20261020-223550-236a\n",
+        "stderr": ""
+      },
+      "after": {
+        "exists": false,
+        "ownerRunId": null,
+        "error": null
+      }
+    },
+    "errors": [],
+    "passed": true
+  },
+  "finishedAt": "2026-10-20T22:39:46.216682"
+}

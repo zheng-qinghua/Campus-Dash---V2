@@ -1,0 +1,7 @@
+# 只能通过显式选择 profile 使用演示身份，不能用于生产。
+dash:
+  auth:
+    demo-login-enabled: true
+    session-namespace: local
+    issuer: campus-dash-local
+    jwt-secret: ${DASH_JWT_SECRET:}

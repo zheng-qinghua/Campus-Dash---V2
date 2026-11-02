@@ -1,0 +1,11 @@
+{
+  "database": "campus_dash_verify_cleanup_20261020_202515",
+  "removedErrand": "700000000070146140",
+  "preservedErrand": "700000000070146141",
+  "passed": true,
+  "checks": [
+    "指定 run 的候选 ZSET、metadata Hash 和投影全部删除",
+    "其他 run 的 DB 订单及三类 Redis 键均保留"
+  ],
+  "finishedAt": "2026-10-20T20:25:23.619618"
+}

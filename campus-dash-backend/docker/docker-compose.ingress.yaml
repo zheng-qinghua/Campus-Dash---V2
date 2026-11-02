@@ -1,0 +1,54 @@
+# 与 docker-compose.yaml 合并。先 mvn install，再构建；只有 gateway 发布业务入口端口。
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    expose: ["8080"]
+    environment:
+      DASH_BIND_ADDRESS: 0.0.0.0
+      SPRING_PROFILES_ACTIVE: ${DASH_RUNTIME_PROFILE:-prod}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:?Set SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/campus_dash?useSSL=false&serverTimezone=Asia/Shanghai
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      DASH_MQ_ENDPOINTS: rmqbroker:8081
+      SPRING_CONFIG_IMPORT: optional:file:/run/config/identity.yaml
+      CAMPUS_OIDC_CLIENT_ID: ${CAMPUS_OIDC_CLIENT_ID:-}
+      CAMPUS_OIDC_CLIENT_SECRET: ${CAMPUS_OIDC_CLIENT_SECRET:-}
+      CAMPUS_OIDC_REDIRECT_URI: ${CAMPUS_OIDC_REDIRECT_URI:-}
+      CAMPUS_OIDC_ISSUER: ${CAMPUS_OIDC_ISSUER:-}
+      CAMPUS_OIDC_SUBJECT: ${CAMPUS_OIDC_SUBJECT:-}
+      CAMPUS_LOCAL_USER_ID: ${CAMPUS_LOCAL_USER_ID:-}
+      DASH_INTERNAL_TOKEN: ${DASH_INTERNAL_TOKEN:-}
+      DASH_JWT_SECRET: ${DASH_JWT_SECRET:-}
+    volumes:
+      - ${DASH_IDENTITY_CONFIG:-./identity.yaml}:/run/config/identity.yaml:ro
+    depends_on:
+      mysql: { condition: service_healthy }
+      redis: { condition: service_healthy }
+  worker:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.worker
+    environment:
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:?Set SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/campus_dash?useSSL=false&serverTimezone=Asia/Shanghai
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      DASH_MQ_ENDPOINTS: rmqbroker:8081
+    depends_on:
+      mysql: { condition: service_healthy }
+      redis: { condition: service_healthy }
+  gateway:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.gateway
+    ports: ["8090:8090"]
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      DASH_BACKEND_URI: http://app:8080
+      DASH_BACKEND_WS_URI: ws://app:8080
+      DASH_TRUSTED_PROXIES: ${DASH_TRUSTED_PROXIES:-}
+    depends_on: [app, redis]

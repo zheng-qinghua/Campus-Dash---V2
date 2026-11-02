@@ -1,0 +1,8 @@
+# 只能通过显式选择 profile 使用演示身份，不能用于生产。
+dash:
+  auth:
+    demo-login-enabled: true
+    allow-header-identity: true
+    session-namespace: bench
+    issuer: campus-dash-bench
+    jwt-secret: ${DASH_JWT_SECRET:}

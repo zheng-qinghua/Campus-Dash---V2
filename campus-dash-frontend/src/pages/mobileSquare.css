@@ -1,0 +1,116 @@
+/* 手机广场围绕接单浏览组织，桌面继续使用完整工作台布局。 */
+.square-page .hero-mobile-copy,
+.square-page .hero-mobile-cta,
+.square-page .mobile-market-refresh,
+.square-page .mobile-platform-toggle { display: none; }
+
+@media (max-width: 600px) {
+  .square-page > .page-head { display: none; }
+  .square-page .square-hero {
+    min-height: 76px;
+    border: 0;
+    border-radius: 14px;
+    background: #ffd100;
+    box-shadow: none;
+  }
+  .square-page .hero-copy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+  .square-page .hero-copy > .soft-label,
+  .square-page .hero-copy > h2,
+  .square-page .hero-copy > p,
+  .square-page .hero-desktop-cta,
+  .square-page .square-hero .campus-art,
+  .square-page .hero-caption { display: none; }
+  .square-page .hero-mobile-copy { display: grid; gap: 3px; }
+  .square-page .hero-mobile-copy strong { font-size: 19px; line-height: 1.3; color: #27230d; letter-spacing: -.3px; }
+  .square-page .hero-mobile-copy > span { font-size: 11px; line-height: 1.5; color: #665510; white-space: nowrap; }
+  .square-page .hero-copy .btn {
+    flex-shrink: 0;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 22px;
+    background: #27230d;
+    color: #fff;
+    font-size: 12px;
+  }
+  .square-page .hero-mobile-cta { display: inline; }
+  .square-page .service-shortcuts { gap: 6px; margin: 8px 0; }
+  .square-page .service-shortcuts > a {
+    flex-direction: row;
+    justify-content: center;
+    min-height: 44px;
+    gap: 5px;
+    padding: 0 4px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    text-align: left;
+  }
+  .square-page .service-shortcuts > a:hover { transform: none; box-shadow: none; background: #fff; }
+  .square-page .service-shortcuts .shortcut-icon { width: 28px; height: 28px; border-radius: 9px; flex-shrink: 0; }
+  .square-page .service-shortcuts .shortcut-icon svg { width: 17px; height: 17px; }
+  .square-page .service-shortcuts strong { color: #454545; font-size: 11px; white-space: nowrap; }
+  .square-page .service-shortcuts small,
+  .square-page .service-shortcuts > a > svg { display: none; }
+  .square-page .square-workspace { display: block; }
+  .square-page .task-market > .section-title { display: none; }
+  .square-page .market-toolbar { display: flex; flex-direction: column-reverse; gap: 3px; margin-bottom: 7px; }
+  .square-page .market-search-row { gap: 6px; min-width: 0; }
+  .square-page .search-field { padding: 0 10px; min-height: 44px; border: 0; background: #fff; border-radius: 11px; }
+  .square-page .search-field input { padding: 9px 0; font-size: 16px; }
+  .square-page .search-field > button { min-width: 28px; min-height: 44px; }
+  .square-page .market-search-row > select { min-width: 0; width: 91px; min-height: 44px; padding: 0 6px; border: 0; border-radius: 11px; background: #fff; font-size: 11px; }
+  .square-page .mobile-market-refresh { display: grid; place-items: center; width: 38px; min-height: 44px; flex-shrink: 0; border-radius: 11px; color: #777; background: #fff; }
+  .square-page .category-tabs { flex-wrap: nowrap; justify-content: space-between; gap: 0; padding: 0; }
+  .square-page .category-tabs button { position: relative; min-height: 40px; padding: 0 6px; border-radius: 0; background: transparent; font-size: 12px; white-space: nowrap; }
+  .square-page .category-tabs button.active { color: #242424; background: transparent; font-weight: 650; }
+  .square-page .category-tabs button.active::after { content: ''; position: absolute; bottom: 2px; left: 50%; width: 22px; height: 4px; transform: translateX(-50%); border-radius: 3px; background: #ffd100; }
+  .square-page .card-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .square-page .errand-card { padding: 11px 12px 9px; border-color: #eeeeee; border-radius: 14px; box-shadow: 0 2px 5px #22222202; }
+  .square-page .card-top { min-height: 20px; margin-bottom: 4px; }
+  .square-page .category-label { font-size: 11px; gap: 4px; }
+  .square-page .category-label svg { width: 14px; height: 14px; }
+  .square-page .card-number { display: none; }
+  .square-page .status { padding: 2px 6px; font-size: 10px; }
+  .square-page .card-title { display: block; min-height: 0; font-size: 15px; line-height: 1.45; -webkit-line-clamp: unset; overflow: visible; }
+  .square-page .card-meta { gap: 4px 8px; margin: 5px 0 2px; font-size: 11px; line-height: 18px; }
+  .square-page .card-bottom { min-height: 44px; gap: 4px 8px; padding-top: 0; border-top: 0; }
+  .square-page .card-reward { gap: 4px; }
+  .square-page .reward { font-size: 23px; }
+  .square-page .reward-label { font-size: 10px; }
+  .square-page .card-controls { gap: 8px; }
+  .square-page .card-detail { min-height: 44px; padding: 0 4px; font-size: 11px; }
+  .square-page .actions.compact { gap: 6px; }
+  .square-page .actions.compact .btn { min-height: 44px; padding: 0 13px; border-radius: 22px; font-size: 12px; }
+  .square-page .action-msg { padding: 5px 0; line-height: 1.5; }
+  .square-page .list-footnote { margin: 14px 6px 12px; font-size: 10px; line-height: 1.5; }
+  .square-page .mobile-platform-toggle { display: flex; align-items: center; gap: 6px; width: 100%; min-height: 48px; padding: 0 2px; color: #777; }
+  .square-page .mobile-platform-toggle > span { color: #555; font-size: 12px; font-weight: 550; }
+  .square-page .mobile-platform-toggle > small { font-size: 10px; }
+  .square-page .mobile-platform-toggle > svg:last-child { margin-left: auto; }
+  .square-page .market-aside { display: none; }
+  .square-page .market-aside.is-open { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 5px; }
+  .square-page .market-aside.is-open .overview-panel { display: block; }
+  .square-page .overview-numbers { padding: 16px 0; }
+  .square-page .lab-panel { padding: 16px; margin-top: 12px; }
+}
+
+@media (max-width: 360px) {
+  .square-page .hero-copy { padding-left: 12px; padding-right: 12px; gap: 6px; }
+  .square-page .hero-mobile-copy strong { font-size: 18px; }
+  .square-page .hero-mobile-copy > span { font-size: 10px; }
+  .square-page .hero-copy .btn { gap: 5px; padding: 0 10px; }
+  .square-page .service-shortcuts > a { gap: 3px; padding: 0; }
+  .square-page .service-shortcuts .shortcut-icon { width: 24px; height: 26px; }
+  .square-page .service-shortcuts strong { font-size: 10px; }
+  .square-page .market-search-row > select { width: 79px; font-size: 10px; }
+  .square-page .card-controls { gap: 4px; }
+  .square-page .actions.compact .btn { padding-left: 10px; padding-right: 10px; }
+}

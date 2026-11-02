@@ -1,0 +1,15 @@
+{
+  "failure": "验收仅搜索API日志，未覆盖worker承担事务回查",
+  "businessRecovered": true,
+  "evidence": [
+    {
+      "file": "worker-1.log",
+      "line": "2026-10-20T22:39:29.319+08:00  INFO 85911 --- [campus-dash-worker] [dExecutor-0-113] c.c.i.config.RocketMqFundEventAdapter    : 事务消息回查 bizNo=settle:238310129206988800 流水存在=true"
+    },
+    {
+      "file": "worker-1.log",
+      "line": "2026-10-20T22:39:29.334+08:00  INFO 85911 --- [campus-dash-worker] [nsumption-4-114] c.campusdash.worker.FundEventConsumer    : 资金事件已消费 msgKey=settle:238310129206988800 tag=SETTLED errandId=238310129206988800"
+    }
+  ],
+  "originalReportPreserved": true
+}

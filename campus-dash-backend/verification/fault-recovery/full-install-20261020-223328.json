@@ -1,0 +1,549 @@
+{
+  "database": "campus_dash_verify_20261020_223328",
+  "startedAt": "2026-10-20T22:33:28+08:00",
+  "finishedAt": "2026-10-20T22:35:39+08:00",
+  "requireMiddleware": true,
+  "requireMQ": true,
+  "exitCode": 0,
+  "totals": {
+    "tests": 260,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "freshXmlFiles": 66,
+  "reports": [
+    {
+      "file": "dash-application/target/surefire-reports/TEST-com.campusdash.application.usecase.AutoSettleErrandUseCaseTest.xml",
+      "fresh": true,
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-application/target/surefire-reports/TEST-com.campusdash.application.usecase.CreditCalibrationUseCaseTest.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-application/target/surefire-reports/TEST-com.campusdash.application.usecase.FundOperationSafetyTest.xml",
+      "fresh": true,
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-application/target/surefire-reports/TEST-com.campusdash.application.usecase.GrabErrandUseCaseTest.xml",
+      "fresh": true,
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-application/target/surefire-reports/TEST-com.campusdash.application.usecase.GrabRecoveryUseCaseTest.xml",
+      "fresh": true,
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-application/target/surefire-reports/TEST-com.campusdash.application.usecase.query.GetErrandDetailUseCaseTest.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-application/target/surefire-reports/TEST-com.campusdash.application.usecase.query.QueryErrandListUseCaseTest.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bench/target/surefire-reports/TEST-com.campusdash.bench.SpikeLoadClientTest.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.ApiEndpointIT.xml",
+      "fresh": true,
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.AuthModeIT$JwtMode.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.AuthModeIT$SessionMode.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.AuthModeIT.xml",
+      "fresh": true,
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.AuthRefreshIT.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.AutoSettleDeadlineIT.xml",
+      "fresh": true,
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.BackdoorDisabledIT.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.CacheCheckIT.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.CacheConsistencyIT.xml",
+      "fresh": true,
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.CacheDoubleDeleteControlIT.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.CacheEvictionOrderControlIT.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.CreditCalibrationIT.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.CreditIT.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.CursorPaginationIT.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.ErrandDetailCacheRecoveryIT.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.GrabConcurrencyIT.xml",
+      "fresh": true,
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.GrabHttpContractIT.xml",
+      "fresh": true,
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.GrabReliabilityV2IT.xml",
+      "fresh": true,
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.GrabResponseRecoveryIT.xml",
+      "fresh": true,
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.OversellControlExperimentIT.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.PublishEscrowIT.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.SettleConcurrencyIT.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.SettlementIT.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.TimeoutRaceReliabilityIT.xml",
+      "fresh": true,
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.TimeoutTransferIT.xml",
+      "fresh": true,
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-bootstrap/target/surefire-reports/TEST-com.campusdash.it.TransactionPitfallIT.xml",
+      "fresh": true,
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-domain/target/surefire-reports/TEST-com.campusdash.domain.ArchitectureRuleTest.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-domain/target/surefire-reports/TEST-com.campusdash.domain.ErrandAggregateTest.xml",
+      "fresh": true,
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-domain/target/surefire-reports/TEST-com.campusdash.domain.ErrandStatusMachineTest.xml",
+      "fresh": true,
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-domain/target/surefire-reports/TEST-com.campusdash.domain.ErrandTransferTest.xml",
+      "fresh": true,
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-domain/target/surefire-reports/TEST-com.campusdash.domain.MoneyTest.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-gateway/target/surefire-reports/TEST-com.campusdash.gateway.EntryProtectionFilterTest.xml",
+      "fresh": true,
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-gateway/target/surefire-reports/TEST-com.campusdash.gateway.GatewayBudgetRedisIT.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-gateway/target/surefire-reports/TEST-com.campusdash.gateway.GatewayHttpIT.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.auth.AuthConfigurationGuardTest.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.auth.AuthRedisDependencyTest.xml",
+      "fresh": true,
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.auth.ConfiguredIdentityVerificationAdapterTest.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.auth.JwtAuthIsolationRedisIT.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.cache.RedisCandidateQueueIT.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.cache.RedisGrabProjectionIT.xml",
+      "fresh": true,
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.config.RocketMqFundEventAdapterTest.xml",
+      "fresh": true,
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.grab.LocalGrabRateLimiterAdapterTest.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.grab.RedisRunnerRateLimiterAdapterTest.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.grab.RunnerRateLimitRedisIT.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.grab.SentinelGrabRateLimiterAdapterTest.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.persistence.JdbcErrandDeadlineRaceIT.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.persistence.JdbcGrabReliabilityIT.xml",
+      "fresh": true,
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.persistence.JdbcLocalMessageConcurrencyIT.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.realtime.FundEventPushConsumerConditionTest.xml",
+      "fresh": true,
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.sharding.CampusDashShardingPolicyTest.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-infrastructure/target/surefire-reports/TEST-com.campusdash.infrastructure.sharding.CampusDashShardingRuleFactoryTest.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-presentation/target/surefire-reports/TEST-com.campusdash.presentation.auth.AuthControllerTest.xml",
+      "fresh": true,
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-presentation/target/surefire-reports/TEST-com.campusdash.presentation.auth.AuthInterceptorTest.xml",
+      "fresh": true,
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-presentation/target/surefire-reports/TEST-com.campusdash.presentation.auth.InternalServiceInterceptorTest.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-presentation/target/surefire-reports/TEST-com.campusdash.presentation.auth.OidcLoginFlowTest.xml",
+      "fresh": true,
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-worker/target/surefire-reports/TEST-com.campusdash.worker.AutoSettleConsumerTest.xml",
+      "fresh": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-worker/target/surefire-reports/TEST-com.campusdash.worker.RocketMqTimeoutReliabilityIT.xml",
+      "fresh": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "dash-worker/target/surefire-reports/TEST-com.campusdash.worker.TimeoutTransferConsumerTest.xml",
+      "fresh": true,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "jarSha256": {
+    "bootstrap": "86138ae1f1b3df773cb98cca3304c5407dc650234c9099ad4a3f38aaf493ad9a",
+    "worker": "2b4f9a1d6728f7c1561f4295f868200b02ed0fc6bf13295c3aa73eb957c7953c"
+  }
+}

@@ -1,0 +1,5 @@
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY dash-gateway/target/dash-gateway-1.0.0-SNAPSHOT.jar /app/gateway.jar
+USER 10001
+ENTRYPOINT ["java", "-jar", "/app/gateway.jar"]

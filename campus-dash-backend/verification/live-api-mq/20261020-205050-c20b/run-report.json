@@ -1,0 +1,68 @@
+{
+  "runId": "20261020-205050-c20b",
+  "database": "campus_dash_verify_live_20261020_205050_c20b",
+  "startedAt": "2026-10-20T20:50:50.380256",
+  "passed": false,
+  "checks": [
+    {
+      "name": "真实API/MQ脚本完整通过",
+      "passed": false,
+      "evidence": "送达超时自动结算 状态已变化，但缺少 MQ 消费证据：238283156879478784 自动结算消息处理"
+    }
+  ],
+  "environment": {
+    "mysql": "8.0.40",
+    "redis": "7.4",
+    "rocketmq": "5.3.1",
+    "confirmSeconds": 30,
+    "autoSettleSeconds": 45,
+    "scanIntervalMillis": 600000,
+    "defaultRunnerRateLimits": true
+  },
+  "logs": {
+    "api": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-205050-c20b/api.log",
+    "worker": "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-205050-c20b/worker.log"
+  },
+  "ports": {
+    "redis": 49967,
+    "mq": 49968,
+    "api": 49969
+  },
+  "network": "dash-live-20261020-205050-c20b",
+  "baselineTotalCents": 200000,
+  "jarSha256": {
+    "api": "f612600638c44c984134c0741a6753be0d260e823a441d17bb6d1b5f71ecd8fc",
+    "worker": "733342a680cfeded1cc5776ff1b08b874e00ba4d7325e9a138a262d69a0f9386"
+  },
+  "javaPids": [
+    72280,
+    72281
+  ],
+  "readyAt": "2026-10-20T20:52:07.772676",
+  "scriptCommand": [
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-frontend/tests/live_api_smoke.py",
+    "--isolated-backend-ready",
+    "--base",
+    "http://127.0.0.1:49969",
+    "--worker-log",
+    "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-205050-c20b/worker.log",
+    "--output",
+    "/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/verification/live-api-mq/20261020-205050-c20b/api-results"
+  ],
+  "scriptExitCode": 1,
+  "apiChecks": 29,
+  "apiPassed": false,
+  "taskIds": [
+    "238283143289933824",
+    "238283154857824256",
+    "238283155440832512",
+    "238283156262916096",
+    "238283156644597760",
+    "238283156879478784"
+  ],
+  "failure": "真实API/MQ脚本完整通过: 送达超时自动结算 状态已变化，但缺少 MQ 消费证据：238283156879478784 自动结算消息处理",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/scripts/verify-live-api-mq.py\", line 95, in <module>\n    check('真实API/MQ脚本完整通过',result.returncode==0 and evidence['passed'],evidence.get('failure',report['apiChecks']))\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/haojunpan/Desktop/工作项目/project/ai/ai-agents-from-zero/项目实战-校园跑腿抢单市场/实战项目-线上版本/项目工程/campus-dash-backend/scripts/verify-live-api-mq.py\", line 45, in check\n    if not valid: raise AssertionError(name+': '+str(evidence))\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 真实API/MQ脚本完整通过: 送达超时自动结算 状态已变化，但缺少 MQ 消费证据：238283156879478784 自动结算消息处理\n",
+  "processesStopped": true,
+  "finishedAt": "2026-10-20T20:53:19.381720"
+}
